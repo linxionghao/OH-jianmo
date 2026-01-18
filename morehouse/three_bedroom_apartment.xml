@@ -1,0 +1,594 @@
+<mujoco model="真实三室一厅公寓-优化版">
+  <compiler angle="radian" coordinate="local" inertiafromgeom="true"/>
+
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="RK4"/>
+
+  <asset>
+    <!-- 材质定义 -->
+    <!-- 地板纹理 -->
+    <texture name="floor_wood" type="2d" builtin="checker" rgb1="0.55 0.35 0.18" rgb2="0.48 0.28 0.12" width="512" height="512"/>
+    <texture name="tile_floor" type="2d" builtin="checker" rgb1="0.92 0.90 0.88" rgb2="0.88 0.85 0.82" width="512" height="512"/>
+    <texture name="carpet" type="2d" builtin="flat" rgb1="0.65 0.55 0.45" width="512" height="512"/>
+    <texture name="marble" type="2d" builtin="checker" rgb1="0.25 0.22 0.20" rgb2="0.22 0.19 0.17" width="512" height="512"/>
+
+    <!-- 墙面纹理 -->
+    <texture name="wall_living" type="2d" builtin="flat" rgb1="0.88 0.90 0.85" width="512" height="512"/>
+    <texture name="wall_bedroom" type="2d" builtin="flat" rgb1="0.92 0.88 0.82" width="512" height="512"/>
+    <texture name="wall_kitchen" type="2d" builtin="flat" rgb1="0.95 0.93 0.88" width="512" height="512"/>
+    <texture name="wall_bathroom" type="2d" builtin="flat" rgb1="0.88 0.92 0.95" width="512" height="512"/>
+    <texture name="ceiling" type="2d" builtin="flat" rgb1="0.98 0.98 0.96" width="512" height="512"/>
+
+    <!-- 材质 -->
+    <material name="floor_wood" texture="floor_wood" texrepeat="15 15" reflectance="0.15"/>
+    <material name="tile" texture="tile_floor" texrepeat="8 8" reflectance="0.25"/>
+    <material name="carpet" texture="carpet" texrepeat="3 3"/>
+    <material name="marble" texture="marble" texrepeat="5 5" reflectance="0.35"/>
+
+    <!-- 墙面材质 -->
+    <material name="wall_living" texture="wall_living" rgba="0.88 0.90 0.85 1"/>
+    <material name="wall_bedroom" texture="wall_bedroom" rgba="0.92 0.88 0.82 1"/>
+    <material name="wall_kitchen" texture="wall_kitchen" rgba="0.95 0.93 0.88 1"/>
+    <material name="wall_bathroom" texture="wall_bathroom" rgba="0.88 0.92 0.95 1"/>
+    <material name="wall_neutral" rgba="0.90 0.88 0.84 1"/>
+    <material name="ceiling" texture="ceiling" rgba="0.98 0.98 0.96 1"/>
+
+    <!-- 家具材质 -->
+    <material name="wood_dark" rgba="0.35 0.22 0.12 1"/>
+    <material name="wood_medium" rgba="0.52 0.38 0.25 1"/>
+    <material name="wood_light" rgba="0.72 0.58 0.42 1"/>
+    <material name="wood_cherry" rgba="0.48 0.25 0.18 1"/>
+
+    <!-- 沙发和纺织品 -->
+    <material name="sofa_blue" rgba="0.28 0.42 0.62 1"/>
+    <material name="sofa_cushion" rgba="0.35 0.48 0.68 1"/>
+    <material name="carpet_living" rgba="0.68 0.62 0.55 1"/>
+    <material name="carpet_bedroom" rgba="0.75 0.68 0.62 1"/>
+
+    <!-- 床上用品 -->
+    <material name="bed_sheet_master" rgba="0.92 0.90 0.88 1"/>
+    <material name="bed_sheet_2" rgba="0.85 0.88 0.92 1"/>
+    <material name="bed_sheet_kids" rgba="0.95 0.88 0.85 1"/>
+    <material name="bed_frame" rgba="0.45 0.32 0.22 1"/>
+    <material name="pillow_white" rgba="0.95 0.95 0.98 1"/>
+    <material name="blanket_blue" rgba="0.65 0.72 0.82 1"/>
+    <material name="blanket_green" rgba="0.72 0.82 0.75 1"/>
+    <material name="blanket_pink" rgba="0.92 0.82 0.85 1"/>
+
+    <!-- 厨房和卫生间 -->
+    <material name="cabinet_white" rgba="0.95 0.95 0.95 1"/>
+    <material name="cabinet_grey" rgba="0.82 0.82 0.85 1"/>
+
+    <!-- 其他材质 -->
+    <material name="metal" rgba="0.75 0.75 0.78 1" reflectance="0.45"/>
+    <material name="metal_gold" rgba="0.85 0.72 0.45 1" reflectance="0.5"/>
+    <material name="glass" rgba="0.82 0.90 0.95 0.3" reflectance="0.5"/>
+    <material name="glass_window" rgba="0.85 0.92 0.98 0.25" reflectance="0.4"/>
+    <material name="door_wood" rgba="0.48 0.32 0.22 1"/>
+    <material name="black_plastic" rgba="0.12 0.12 0.12 1"/>
+
+    <!-- 装饰颜色 -->
+    <material name="paint_warm" rgba="0.88 0.78 0.65 1"/>
+    <material name="paint_cool" rgba="0.75 0.82 0.88 1"/>
+    <material name="accent_red" rgba="0.82 0.35 0.28 1"/>
+    <material name="accent_green" rgba="0.35 0.65 0.42 1"/>
+    <material name="accent_yellow" rgba="0.92 0.82 0.45 1"/>
+  </asset>
+
+  <worldbody>
+    <!-- 光照系统 -->
+    <light directional="true" pos="0 0 15" dir="0 0 -1" diffuse="0.6 0.6 0.6" specular="0.3 0.3 0.3"/>
+    <light directional="true" pos="8 8 12" dir="-1 -1 -1" diffuse="0.4 0.4 0.4" specular="0.2 0.2 0.2"/>
+    <light directional="true" pos="-8 8 10" dir="1 -1 -1" diffuse="0.3 0.3 0.3"/>
+
+    <!-- 地板 -->
+    <geom name="main_floor" type="plane" pos="0 0 0" size="20 20 0.1" material="floor_wood"/>
+
+    <!-- ========== 外墙结构 (12m x 10m) ========== -->
+    <body name="exterior">
+      <!-- 北墙 -->
+      <geom name="wall_north" type="box" pos="0 6 1.4" size="6 0.12 1.4" material="wall_neutral"/>
+      <!-- 南墙 -->
+      <geom name="wall_south" type="box" pos="0 -6 1.4" size="6 0.12 1.4" material="wall_neutral"/>
+      <!-- 东墙 -->
+      <geom name="wall_east" type="box" pos="6 0 1.4" size="0.12 6 1.4" material="wall_neutral"/>
+      <!-- 西墙 -->
+      <geom name="wall_west" type="box" pos="-6 0 1.4" size="0.12 6 1.4" material="wall_neutral"/>
+    </body>
+
+    <!-- ========== 客厅 (南部, 6m x 4m) ========== -->
+    <body name="living_room">
+      <!-- 客厅北墙（与走廊分隔，留门洞） -->
+      <geom name="living_wall_n1" type="box" pos="-2.5 -1 1.4" size="1.5 0.1 1.4" material="wall_living"/>
+      <geom name="living_wall_n2" type="box" pos="2.5 -1 1.4" size="1.5 0.1 1.4" material="wall_living"/>
+
+      <!-- 地毯 -->
+      <geom name="living_carpet" type="box" pos="0 -3.5 0.01" size="2.2 1.8 0.01" material="carpet_living"/>
+
+      <!-- L型沙发 -->
+      <body name="sofa_main" pos="-2.8 -4.5 0.25">
+        <geom type="box" size="1.3 0.4 0.25" material="sofa_blue"/>
+        <geom type="box" pos="0 -0.32 0.35" size="1.3 0.08 0.35" material="sofa_blue"/>
+      </body>
+      <body name="sofa_side" pos="-1.1 -4.5 0.25">
+        <geom type="box" size="0.4 0.4 0.25" material="sofa_blue"/>
+        <geom type="box" pos="0 -0.32 0.35" size="0.4 0.08 0.35" material="sofa_blue"/>
+      </body>
+      <body name="sofa_chaise" pos="0.4 -4.5 0.25">
+        <geom type="box" size="1.2 0.4 0.25" material="sofa_blue"/>
+        <geom type="box" pos="0 -0.32 0.35" size="1.2 0.08 0.35" material="sofa_blue"/>
+      </body>
+
+      <!-- 茶几 -->
+      <body name="coffee_table" pos="0 -3 0">
+        <geom type="box" pos="0 0 0.35" size="0.6 0.45 0.025" material="glass"/>
+        <geom type="cylinder" pos="-0.5 -0.35 0.175" size="0.015 0.175" material="metal"/>
+        <geom type="cylinder" pos="0.5 -0.35 0.175" size="0.015 0.175" material="metal"/>
+        <geom type="cylinder" pos="-0.5 0.35 0.175" size="0.015 0.175" material="metal"/>
+        <geom type="cylinder" pos="0.5 0.35 0.175" size="0.015 0.175" material="metal"/>
+      </body>
+
+      <!-- 电视柜 -->
+      <body name="tv_unit" pos="2.5 -5.7 0.3">
+        <geom type="box" size="1.4 0.3 0.3" material="wood_dark"/>
+      </body>
+
+      <!-- 电视 -->
+      <body name="tv" pos="2.5 -5.65 1.1">
+        <geom type="box" size="0.65 0.04 0.38" material="black_plastic"/>
+      </body>
+
+      <!-- 餐桌 -->
+      <body name="dining_table" pos="2 -2 0">
+        <geom type="box" pos="0 0 0.73" size="0.9 0.65 0.03" material="wood_dark"/>
+        <geom type="cylinder" pos="0 0 0.365" size="0.08 0.365" material="metal"/>
+      </body>
+
+      <!-- 餐椅 -->
+      <body name="chair_1" pos="2 -1 0.25">
+        <geom type="box" size="0.2 0.2 0.02" material="wood_light"/>
+        <geom type="box" pos="0 -0.15 0.25" size="0.2 0.03 0.25" material="wood_light"/>
+      </body>
+      <body name="chair_2" pos="2 -3 0.25">
+        <geom type="box" size="0.2 0.2 0.02" material="wood_light"/>
+        <geom type="box" pos="0 0.15 0.25" size="0.2 0.03 0.25" material="wood_light"/>
+      </body>
+
+      <!-- 边柜 -->
+      <body name="sideboard" pos="-4 -2.5 0.45">
+        <geom type="box" size="0.3 1 0.45" material="wood_dark"/>
+      </body>
+
+      <!-- 绿植 -->
+      <body name="plant_1" pos="-4 -4.5 0.9">
+        <geom type="cylinder" size="0.12 0.02" material="wood_dark"/>
+        <geom type="sphere" pos="0 0 0.15" size="0.18" material="accent_green"/>
+      </body>
+
+      <!-- 吸顶灯 -->
+      <body name="ceiling_light_living" pos="0 -3 2.7">
+        <geom type="cylinder" size="0.25 0.06" rgba="0.95 0.95 0.92 0.85"/>
+        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.7 0.7 0.65" specular="0.3 0.3 0.3" cutoff="75"/>
+      </body>
+    </body>
+
+    <!-- ========== 主卧 (东北, 3.5m x 3.5m) ========== -->
+    <body name="master_bedroom">
+      <!-- 西墙（留门洞） -->
+      <geom name="mbr_wall_w1" type="box" pos="2.5 2.5 1.4" size="0.1 1.5 1.4" material="wall_bedroom"/>
+      <geom name="mbr_wall_w2" type="box" pos="2.5 4.5 1.4" size="0.1 1 1.4" material="wall_bedroom"/>
+      <!-- 南墙 -->
+      <geom name="mbr_wall_s" type="box" pos="4.25 1 1.4" size="1.75 0.1 1.4" material="wall_bedroom"/>
+
+      <!-- 双人床 -->
+      <body name="master_bed" pos="4.3 4.5 0">
+        <geom type="box" pos="0 0 0.2" size="0.95 1.3 0.2" material="bed_frame"/>
+        <geom type="box" pos="0 0 0.42" size="0.9 1.25 0.12" material="bed_sheet_master"/>
+        <geom type="box" pos="0 -1.35 0.65" size="0.95 0.08 0.45" material="wood_cherry"/>
+        <geom type="box" pos="0 0.25 0.56" size="0.85 0.75 0.02" material="blanket_blue"/>
+      </body>
+
+      <!-- 床头柜 -->
+      <body name="nightstand_left" pos="3.1 4.5 0.28">
+        <geom type="box" size="0.22 0.3 0.28" material="wood_dark"/>
+        <body name="lamp_left" pos="0 0 0.58">
+          <geom type="cylinder" size="0.07 0.01" rgba="0.95 0.92 0.88 0.75"/>
+          <geom type="cylinder" pos="0 0 -0.1" size="0.012 0.1" material="metal"/>
+          <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.4 0.35 0.3" cutoff="50"/>
+        </body>
+      </body>
+      <body name="nightstand_right" pos="5.5 4.5 0.28">
+        <geom type="box" size="0.22 0.3 0.28" material="wood_dark"/>
+        <body name="lamp_right" pos="0 0 0.58">
+          <geom type="cylinder" size="0.07 0.01" rgba="0.95 0.92 0.88 0.75"/>
+          <geom type="cylinder" pos="0 0 -0.1" size="0.012 0.1" material="metal"/>
+          <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.4 0.35 0.3" cutoff="50"/>
+        </body>
+      </body>
+
+      <!-- 衣柜 -->
+      <body name="wardrobe_master" pos="5.6 1.8 1.05">
+        <geom type="box" size="0.28 1.2 1.05" material="wood_dark"/>
+      </body>
+
+      <!-- 地毯 -->
+      <geom name="mbr_carpet" type="box" pos="4.2 4.5 0.01" size="1.3 1.6 0.01" material="carpet_bedroom"/>
+
+      <!-- 吸顶灯 -->
+      <body name="ceiling_light_mbr" pos="4 3.5 2.7">
+        <geom type="cylinder" size="0.22 0.05" rgba="0.95 0.95 0.92 0.85"/>
+        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.65 0.65 0.62" cutoff="70"/>
+      </body>
+    </body>
+
+    <!-- ========== 次卧 (西北, 3.5m x 3.5m) ========== -->
+    <body name="bedroom_2">
+      <!-- 东墙（留门洞） -->
+      <geom name="br2_wall_e1" type="box" pos="-2.5 2.5 1.4" size="0.1 1.5 1.4" material="wall_bedroom"/>
+      <geom name="br2_wall_e2" type="box" pos="-2.5 4.5 1.4" size="0.1 1 1.4" material="wall_bedroom"/>
+      <!-- 南墙 -->
+      <geom name="br2_wall_s" type="box" pos="-4.25 1 1.4" size="1.75 0.1 1.4" material="wall_bedroom"/>
+
+      <!-- 单人床 -->
+      <body name="bed_2" pos="-4.6 4.5 0">
+        <geom type="box" pos="0 0 0.18" size="0.55 0.95 0.18" material="bed_frame"/>
+        <geom type="box" pos="0 0 0.38" size="0.5 0.9 0.1" material="bed_sheet_2"/>
+        <geom type="box" pos="0 -1 0.58" size="0.55 0.08 0.38" material="wood_medium"/>
+        <geom type="box" pos="0 0.2 0.5" size="0.48 0.58 0.02" material="blanket_green"/>
+      </body>
+
+      <!-- 书桌 -->
+      <body name="study_desk_2" pos="-3.2 4.5 0">
+        <geom type="box" pos="0 0 0.72" size="0.65 0.45 0.02" material="wood_dark"/>
+        <geom type="box" pos="-0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
+        <geom type="box" pos="0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
+        <geom type="box" pos="-0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
+        <geom type="box" pos="0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
+      </body>
+
+      <!-- 办公椅 -->
+      <body name="office_chair_2" pos="-3.2 3.8 0.25">
+        <geom type="cylinder" size="0.2 0.03" material="sofa_blue"/>
+        <geom type="box" pos="0 -0.12 0.23" size="0.2 0.04 0.23" material="sofa_blue"/>
+      </body>
+
+      <!-- 书架 -->
+      <body name="bookshelf_2" pos="-5.7 2.5 0.8">
+        <geom type="box" size="0.15 0.55 0.8" material="wood_dark"/>
+      </body>
+
+      <!-- 吸顶灯 -->
+      <body name="ceiling_light_br2" pos="-4 3.5 2.7">
+        <geom type="cylinder" size="0.22 0.05" rgba="0.95 0.95 0.92 0.85"/>
+        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.65 0.65 0.62" cutoff="70"/>
+      </body>
+    </body>
+
+    <!-- ========== 儿童房 (东南, 3m x 3m) ========== -->
+    <body name="bedroom_3">
+      <!-- 北墙（留门洞） -->
+      <geom name="br3_wall_n1" type="box" pos="3.2 -1 1.4" size="0.8 0.1 1.4" material="wall_bedroom"/>
+      <geom name="br3_wall_n2" type="box" pos="5 -1 1.4" size="1 0.1 1.4" material="wall_bedroom"/>
+      <!-- 西墙 -->
+      <geom name="br3_wall_w" type="box" pos="2.5 -2.5 1.4" size="0.1 1.5 1.4" material="wall_bedroom"/>
+
+      <!-- 儿童床 -->
+      <body name="bed_3" pos="5.3 -3.5 0">
+        <geom type="box" pos="0 0 0.15" size="0.5 0.85 0.15" material="wood_light"/>
+        <geom type="box" pos="0 0 0.32" size="0.45 0.8 0.08" material="bed_sheet_kids"/>
+        <geom type="box" pos="0 -0.88 0.45" size="0.5 0.05 0.18" material="wood_light"/>
+        <geom type="box" pos="0.48 0 0.45" size="0.03 0.8 0.18" material="wood_light"/>
+      </body>
+
+      <!-- 学习桌 -->
+      <body name="study_desk_3" pos="3.2 -3.5 0">
+        <geom type="box" pos="0 0 0.62" size="0.55 0.4 0.02" material="accent_yellow"/>
+        <geom type="box" pos="-0.45 -0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
+        <geom type="box" pos="0.45 -0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
+        <geom type="box" pos="-0.45 0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
+        <geom type="box" pos="0.45 0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
+      </body>
+
+      <!-- 儿童椅 -->
+      <body name="kids_chair" pos="3.2 -2.9 0.18">
+        <geom type="box" size="0.13 0.13 0.02" material="accent_red"/>
+        <geom type="box" pos="0 -0.1 0.15" size="0.13 0.03 0.15" material="accent_red"/>
+      </body>
+
+      <!-- 玩具柜 -->
+      <body name="toy_cabinet" pos="5.5 -1.8 0.35">
+        <geom type="box" size="0.28 0.45 0.35" material="accent_yellow"/>
+      </body>
+
+      <!-- 吸顶灯 -->
+      <body name="ceiling_light_br3" pos="4.2 -2.5 2.7">
+        <geom type="sphere" size="0.18" rgba="0.95 0.9 0.5 0.8"/>
+        <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.65 0.6 0.5" cutoff="65"/>
+      </body>
+    </body>
+
+    <!-- ========== 厨房 (西南, 3.5m x 3m) ========== -->
+    <body name="kitchen">
+      <!-- 北墙（留门洞） -->
+      <geom name="kitchen_wall_n1" type="box" pos="-3.2 -1 1.4" size="0.8 0.1 1.4" material="wall_kitchen"/>
+      <geom name="kitchen_wall_n2" type="box" pos="-5 -1 1.4" size="1 0.1 1.4" material="wall_kitchen"/>
+      <!-- 东墙 -->
+      <geom name="kitchen_wall_e" type="box" pos="-2.5 -2.5 1.4" size="0.1 1.5 1.4" material="wall_kitchen"/>
+
+      <!-- 瓷砖地面 -->
+      <geom name="kitchen_floor" type="box" pos="-4.2 -3 0.01" size="1.6 1.4 0.01" material="tile"/>
+
+      <!-- L型橱柜 -->
+      <body name="cabinet_1" pos="-5.6 -3.5 0.43">
+        <geom type="box" size="0.28 1 0.43" material="cabinet_white"/>
+        <geom type="box" pos="0 0 0.5" size="0.3 1.02 0.02" material="marble"/>
+      </body>
+      <body name="cabinet_2" pos="-4.5 -4.4 0.43">
+        <geom type="box" size="0.8 0.28 0.43" material="cabinet_white"/>
+        <geom type="box" pos="0 0 0.5" size="0.82 0.3 0.02" material="marble"/>
+      </body>
+
+      <!-- 吊柜 -->
+      <body name="wall_cabinet_1" pos="-5.6 -3.5 1.75">
+        <geom type="box" size="0.15 1 0.32" material="cabinet_white"/>
+      </body>
+
+      <!-- 冰箱 -->
+      <body name="refrigerator" pos="-5.65 -1.8 0.95">
+        <geom type="box" size="0.32 0.32 0.95" rgba="0.92 0.92 0.95 1"/>
+      </body>
+
+      <!-- 灶台 -->
+      <body name="stove" pos="-4 -4.4 0.96">
+        <geom type="box" size="0.32 0.25 0.02" rgba="0.1 0.1 0.1 1"/>
+      </body>
+
+      <!-- 水槽 -->
+      <body name="sink" pos="-5.2 -4.4 0.98">
+        <geom type="box" size="0.22 0.3 0.08" rgba="0.88 0.88 0.92 1"/>
+        <geom type="cylinder" pos="0 -0.22 0.12" size="0.012 0.12" material="metal"/>
+      </body>
+
+      <!-- 吸顶灯 -->
+      <body name="ceiling_light_kitchen" pos="-4.2 -3 2.7">
+        <geom type="box" size="0.35 0.35 0.06" rgba="0.95 0.95 0.92 0.85"/>
+        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.72 0.72 0.7" cutoff="70"/>
+      </body>
+    </body>
+
+    <!-- ========== 卫生间 (中部, 2.2m x 2m) ========== -->
+    <body name="bathroom">
+      <!-- 墙体（留门洞在西侧） -->
+      <geom name="bath_wall_n" type="box" pos="0 1 1.4" size="1.1 0.1 1.4" material="wall_bathroom"/>
+      <geom name="bath_wall_e" type="box" pos="1.1 0.3 1.4" size="0.1 1.1 1.4" material="wall_bathroom"/>
+      <geom name="bath_wall_s" type="box" pos="0 -0.5 1.4" size="1.1 0.1 1.4" material="wall_bathroom"/>
+      <geom name="bath_wall_w1" type="box" pos="-1.1 -0.1 1.4" size="0.1 0.4 1.4" material="wall_bathroom"/>
+      <geom name="bath_wall_w2" type="box" pos="-1.1 0.7 1.4" size="0.1 0.4 1.4" material="wall_bathroom"/>
+
+      <!-- 瓷砖地面 -->
+      <geom name="bath_floor" type="box" pos="0 0.25 0.01" size="1.05 1.05 0.01" material="tile"/>
+
+      <!-- 马桶 -->
+      <body name="toilet" pos="0.6 0.7 0">
+        <geom type="cylinder" pos="0 0 0.18" size="0.18 0.18" rgba="0.98 0.98 1 1"/>
+        <geom type="box" pos="0 -0.13 0.45" size="0.16 0.07 0.22" rgba="0.98 0.98 1 1"/>
+      </body>
+
+      <!-- 洗手盆柜 -->
+      <body name="vanity" pos="0 -0.2 0">
+        <geom type="box" pos="0 0 0.38" size="0.45 0.28 0.38" material="cabinet_white"/>
+        <geom type="box" pos="0 0 0.78" size="0.47 0.3 0.02" material="marble"/>
+        <geom type="cylinder" pos="0 0 0.84" size="0.16 0.06" rgba="0.95 0.95 0.98 1"/>
+        <!-- 水龙头 -->
+        <geom type="cylinder" pos="0 -0.2 0.91" size="0.01 0.08" material="metal"/>
+        <!-- 镜子 -->
+        <geom type="box" pos="0 -0.3 1.4" size="0.4 0.02 0.45" material="wood_dark"/>
+        <geom type="box" pos="0 -0.28 1.4" size="0.37 0.01 0.42" material="glass"/>
+      </body>
+
+      <!-- 淋浴房 -->
+      <body name="shower" pos="-0.65 0.7 0">
+        <geom type="box" pos="0 0 0.03" size="0.42 0.35 0.03" rgba="0.98 0.98 1 1"/>
+        <geom type="box" pos="0.4 0 0.85" size="0.02 0.33 0.85" material="glass"/>
+        <geom type="box" pos="0 0.33 0.85" size="0.42 0.02 0.85" material="glass"/>
+      </body>
+
+      <!-- 吸顶灯 -->
+      <body name="ceiling_light_bath" pos="0 0.25 2.7">
+        <geom type="cylinder" size="0.18 0.05" rgba="0.95 0.95 0.95 0.9"/>
+        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.75 0.75 0.75" cutoff="65"/>
+      </body>
+    </body>
+
+    <!-- ========== 走廊 ========== -->
+    <body name="hallway">
+      <!-- 走廊中央开放空间，由各房间墙体围合 -->
+
+      <!-- 鞋柜 -->
+      <body name="shoe_cabinet" pos="-1.8 0 0.38">
+        <geom type="box" size="0.28 0.65 0.38" material="wood_dark"/>
+        <geom type="box" pos="0 0 0.4" size="0.26 0.63 0.02" material="marble"/>
+      </body>
+
+      <!-- 穿衣镜 -->
+      <body name="mirror" pos="1.8 0 0.85">
+        <geom type="box" pos="0 0 0" size="0.32 0.04 0.85" material="wood_dark"/>
+        <geom type="box" pos="0 -0.02 0" size="0.29 0.01 0.8" material="glass"/>
+      </body>
+
+      <!-- 走廊吸顶灯 -->
+      <body name="ceiling_light_hall" pos="0 0.5 2.7">
+        <geom type="box" size="0.4 0.12 0.05" rgba="0.95 0.95 0.92 0.85"/>
+        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.6 0.6 0.58" cutoff="75"/>
+      </body>
+    </body>
+
+    <!-- ========== 门 ========== -->
+    <!-- 主卧门 -->
+    <body name="door_master" pos="2.5 3.5 0.9">
+      <geom type="box" size="0.4 0.04 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.3 0.05 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_master" type="hinge" pos="-0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    </body>
+
+    <!-- 次卧门 -->
+    <body name="door_bedroom2" pos="-2.5 3.5 0.9">
+      <geom type="box" size="0.4 0.04 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="-0.3 0.05 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_bedroom2" type="hinge" pos="0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    </body>
+
+    <!-- 儿童房门 -->
+    <body name="door_bedroom3" pos="4 -1 0.9">
+      <geom type="box" size="0.04 0.4 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.05 -0.3 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_bedroom3" type="hinge" pos="0 -0.4 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    </body>
+
+    <!-- 厨房门 -->
+    <body name="door_kitchen" pos="-4 -1 0.9">
+      <geom type="box" size="0.04 0.4 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.05 0.3 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_kitchen" type="hinge" pos="0 0.4 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    </body>
+
+    <!-- 卫生间门 -->
+    <body name="door_bathroom" pos="-1.1 0.3 0.9">
+      <geom type="box" size="0.04 0.35 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.05 0.25 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_bathroom" type="hinge" pos="0 -0.35 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    </body>
+
+    <!-- ========== 窗户 ========== -->
+    <!-- 客厅窗 -->
+    <body name="window_living" pos="0 -5.94 1.4">
+      <geom type="box" size="2.2 0.06 1.1" material="glass_window"/>
+      <geom type="box" pos="0 0 -1.35" size="2.2 0.08 0.05" material="cabinet_white"/>
+      <geom type="box" pos="0 0 1.15" size="2.2 0.08 0.05" material="cabinet_white"/>
+    </body>
+
+    <!-- 主卧窗 -->
+    <body name="window_master" pos="5.94 3.5 1.4">
+      <geom type="box" size="0.06 1.6 1.1" material="glass_window"/>
+      <geom type="box" pos="0 0 -1.35" size="0.08 1.6 0.05" material="cabinet_white"/>
+      <geom type="box" pos="0 0 1.15" size="0.08 1.6 0.05" material="cabinet_white"/>
+    </body>
+
+    <!-- 次卧窗 -->
+    <body name="window_bedroom2" pos="-5.94 3.5 1.4">
+      <geom type="box" size="0.06 1.6 1.1" material="glass_window"/>
+      <geom type="box" pos="0 0 -1.35" size="0.08 1.6 0.05" material="cabinet_white"/>
+      <geom type="box" pos="0 0 1.15" size="0.08 1.6 0.05" material="cabinet_white"/>
+    </body>
+
+    <!-- 儿童房窗 -->
+    <body name="window_bedroom3" pos="5.94 -2.5 1.3">
+      <geom type="box" size="0.06 1.2 0.9" material="glass_window"/>
+      <geom type="box" pos="0 0 -1.25" size="0.08 1.2 0.05" material="cabinet_white"/>
+      <geom type="box" pos="0 0 0.95" size="0.08 1.2 0.05" material="cabinet_white"/>
+    </body>
+
+    <!-- 厨房窗 -->
+    <body name="window_kitchen" pos="-5.94 -3 1.3">
+      <geom type="box" size="0.06 1 0.8" material="glass_window"/>
+      <geom type="box" pos="0 0 -1.25" size="0.08 1 0.05" material="cabinet_white"/>
+      <geom type="box" pos="0 0 0.85" size="0.08 1 0.05" material="cabinet_white"/>
+    </body>
+
+    <!-- ========== 可移动物品 ========== -->
+    <!-- 沙发抱枕 -->
+    <body name="cushion_1" pos="-3.5 -4.5 0.52">
+      <freejoint/>
+      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3"/>
+    </body>
+    <body name="cushion_2" pos="-2.2 -4.5 0.52">
+      <freejoint/>
+      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3"/>
+    </body>
+
+    <!-- 茶几花瓶 -->
+    <body name="vase" pos="0 -3 0.38">
+      <freejoint/>
+      <geom type="cylinder" size="0.055 0.11" rgba="0.3 0.5 0.7 0.8" mass="0.35"/>
+    </body>
+
+    <!-- 主卧枕头 -->
+    <body name="pillow_1" pos="3.9 4.5 0.58">
+      <freejoint/>
+      <geom type="box" size="0.22 0.14 0.07" material="pillow_white" mass="0.35"/>
+    </body>
+    <body name="pillow_2" pos="4.7 4.5 0.58">
+      <freejoint/>
+      <geom type="box" size="0.22 0.14 0.07" material="pillow_white" mass="0.35"/>
+    </body>
+
+    <!-- 次卧枕头 -->
+    <body name="pillow_br2" pos="-4.6 4.5 0.5">
+      <freejoint/>
+      <geom type="box" size="0.18 0.12 0.06" material="pillow_white" mass="0.28"/>
+    </body>
+
+    <!-- 儿童房枕头 -->
+    <body name="pillow_br3" pos="5.3 -3.5 0.42">
+      <freejoint/>
+      <geom type="box" size="0.16 0.11 0.05" material="blanket_pink" mass="0.22"/>
+    </body>
+
+    <!-- 玩具熊 -->
+    <body name="teddy_bear" pos="5.5 -2.8 0.45">
+      <freejoint/>
+      <geom type="sphere" size="0.07" rgba="0.65 0.45 0.3 1" mass="0.25"/>
+      <geom type="sphere" pos="0 0 0.1" size="0.055" rgba="0.6 0.4 0.25 1"/>
+    </body>
+
+    <!-- 玩具积木 -->
+    <body name="toy_block_1" pos="5.5 -1.5 0.73">
+      <freejoint/>
+      <geom type="box" size="0.035 0.035 0.035" rgba="1 0.3 0.3 1" mass="0.08"/>
+    </body>
+    <body name="toy_block_2" pos="5.6 -1.5 0.73">
+      <freejoint/>
+      <geom type="box" size="0.035 0.035 0.035" rgba="0.3 1 0.3 1" mass="0.08"/>
+    </body>
+
+    <!-- 厨房盘子 -->
+    <body name="plate" pos="-5.2 -3.5 0.98">
+      <freejoint/>
+      <geom type="cylinder" size="0.075 0.01" rgba="0.95 0.95 0.98 1" mass="0.28"/>
+    </body>
+
+    <!-- 调料瓶 -->
+    <body name="spice_1" pos="-4.5 -4.4 1.0">
+      <freejoint/>
+      <geom type="cylinder" size="0.022 0.075" rgba="0.8 0.3 0.2 0.8" mass="0.13"/>
+    </body>
+    <body name="spice_2" pos="-4.3 -4.4 1.0">
+      <freejoint/>
+      <geom type="cylinder" size="0.022 0.075" rgba="0.3 0.7 0.3 0.8" mass="0.13"/>
+    </body>
+
+    <!-- 钥匙 -->
+    <body name="keys" pos="-1.8 0.2 0.79">
+      <freejoint/>
+      <geom type="box" size="0.018 0.035 0.004" rgba="0.7 0.7 0.75 1" mass="0.04"/>
+    </body>
+
+    <!-- ========== 相机视角 ========== -->
+    <camera name="overview" pos="0 -12 11" xyaxes="1 0 0 0 0.8 1" mode="fixed"/>
+    <camera name="bird_eye" pos="0 0 16" xyaxes="1 0 0 0 1 0" mode="fixed"/>
+    <camera name="living_view" pos="-3 -5 2.2" xyaxes="1 0 0 0 0.6 1" mode="fixed"/>
+    <camera name="master_bedroom_view" pos="3 5 2.2" xyaxes="1 0 0 0 -0.6 1" mode="fixed"/>
+    <camera name="kitchen_view" pos="-5 -4 2.2" xyaxes="1 0 0 0 0.6 1" mode="fixed"/>
+    <camera name="bathroom_view" pos="1.5 0.5 1.8" xyaxes="1 0 0 0 0.5 1" mode="fixed"/>
+    <camera name="hallway_view" pos="0 0.5 2.8" xyaxes="1 0 0 0 1 0.4" mode="fixed"/>
+  </worldbody>
+
+  <!-- 执行器 -->
+  <actuator>
+    <motor name="motor_door_master" joint="hinge_master" gear="12"/>
+    <motor name="motor_door_bedroom2" joint="hinge_bedroom2" gear="12"/>
+    <motor name="motor_door_bedroom3" joint="hinge_bedroom3" gear="12"/>
+    <motor name="motor_door_kitchen" joint="hinge_kitchen" gear="12"/>
+    <motor name="motor_door_bathroom" joint="hinge_bathroom" gear="12"/>
+  </actuator>
+
+</mujoco>
