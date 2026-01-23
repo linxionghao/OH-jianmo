@@ -1,7 +1,9 @@
-<mujoco model="真实三室一厅公寓-优化版">
+<?xml version="1.0" encoding="UTF-8"?>
+<mujoco model="three_bedroom_apartment">
   <compiler angle="radian" coordinate="local" inertiafromgeom="true"/>
 
   <option timestep="0.005" gravity="0 0 -9.81" integrator="RK4"/>
+  <contact/>
 
   <asset>
     <!-- 材质定义 -->
@@ -18,6 +20,52 @@
     <texture name="wall_bathroom" type="2d" builtin="flat" rgb1="0.88 0.92 0.95" width="512" height="512"/>
     <texture name="ceiling" type="2d" builtin="flat" rgb1="0.98 0.98 0.96" width="512" height="512"/>
 
+    <!-- 椅子模型 -->
+    <mesh file="chair_ivar_0668/0.stl" name="chair_part0" scale="0.00050688 0.00050688 0.00050688" />
+    <mesh file="chair_ivar_0668/4.stl" name="chair_part4" scale="0.00050688 0.00050688 0.00050688" />
+    <mesh file="chair_ivar_0668/3.stl" name="chair_part3" scale="0.00050688 0.00050688 0.00050688" />
+    <mesh file="chair_ivar_0668/2.stl" name="chair_part2" scale="0.00050688 0.00050688 0.00050688" />
+    <mesh file="chair_ivar_0668/1.stl" name="chair_part1" scale="0.00050688 0.00050688 0.00050688" />
+    
+    <!-- 电视柜模型 -->
+    <mesh file="tvunit_0406/botplane.stl" name="tvunit_part0" scale="0.001 0.001 0.001" />
+    <mesh file="tvunit_0406/midplane.stl" name="tvunit_part1" scale="0.001 0.001 0.001" />
+    <mesh file="tvunit_0406/sideplane1.stl" name="tvunit_part2" scale="0.001 0.001 0.001" />
+    <mesh file="tvunit_0406/sideplane2.stl" name="tvunit_part3" scale="0.001 0.001 0.001" />
+    <mesh file="tvunit_0406/topplane.stl" name="tvunit_part4" scale="0.001 0.001 0.001" />
+    
+    <!-- 微波炉模型 -->
+    <mesh file="microwave/meshes/micro.stl" name="micro" />
+    <mesh file="microwave/meshes/microdoor.stl" name="microdoor" />
+    <mesh file="microwave/meshes/microbutton.stl" name="microbutton" />
+    <mesh file="microwave/meshes/microfeet.stl" name="microfeet" />
+    <mesh file="microwave/meshes/microhandle.stl" name="microhandle" />
+    <mesh file="microwave/meshes/microwindow.stl" name="microwindow" />
+    
+    <!-- 书柜模型（用于替换吊柜） -->
+    <mesh file="bookcase_besta_0170/0.stl" name="bookcase_part0" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/8.stl" name="bookcase_part8" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/7.stl" name="bookcase_part7" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/6.stl" name="bookcase_part6" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/5.stl" name="bookcase_part5" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/4.stl" name="bookcase_part4" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/3.stl" name="bookcase_part3" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/2.stl" name="bookcase_part2" scale="0.0008 0.0008 0.0008" />
+    <mesh file="bookcase_besta_0170/1.stl" name="bookcase_part1" scale="0.0008 0.0008 0.0008" />
+    
+    <!-- Billy书柜模型 -->
+    <mesh file="bookcase_billy_0191/0.stl" name="part0" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/9.stl" name="part9" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/8.stl" name="part8" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/7.stl" name="part7" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/6.stl" name="part6" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/5.stl" name="part5" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/4.stl" name="part4" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/3.stl" name="part3" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/2.stl" name="part2" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/10.stl" name="part10" scale="0.0005 0.0005 0.0005" />
+    <mesh file="bookcase_billy_0191/1.stl" name="part1" scale="0.0005 0.0005 0.0005" />
+    
     <!-- 材质 -->
     <material name="floor_wood" texture="floor_wood" texrepeat="15 15" reflectance="0.15"/>
     <material name="tile" texture="tile_floor" texrepeat="8 8" reflectance="0.25"/>
@@ -57,12 +105,18 @@
     <!-- 厨房和卫生间 -->
     <material name="cabinet_white" rgba="0.95 0.95 0.95 1"/>
     <material name="cabinet_grey" rgba="0.82 0.82 0.85 1"/>
+    
+    <!-- 微波炉材质 -->
+    <material name="micro_black" rgba=".2 .2 .2 1" reflectance="1"/>
+    <material name="micro_white" rgba=".8 .8 .82 1" reflectance="1"/>
+    <material name="micro_window" rgba=".4 .4 .4 .25" reflectance="1"/>
 
     <!-- 其他材质 -->
     <material name="metal" rgba="0.75 0.75 0.78 1" reflectance="0.45"/>
     <material name="metal_gold" rgba="0.85 0.72 0.45 1" reflectance="0.5"/>
     <material name="glass" rgba="0.82 0.90 0.95 0.3" reflectance="0.5"/>
     <material name="glass_window" rgba="0.85 0.92 0.98 0.25" reflectance="0.4"/>
+    <material name="mirror_glass" rgba="0.95 0.98 1.0 0.1" reflectance="0.9"/>
     <material name="door_wood" rgba="0.48 0.32 0.22 1"/>
     <material name="black_plastic" rgba="0.12 0.12 0.12 1"/>
 
@@ -76,12 +130,13 @@
 
   <worldbody>
     <!-- 光照系统 -->
-    <light directional="true" pos="0 0 15" dir="0 0 -1" diffuse="0.6 0.6 0.6" specular="0.3 0.3 0.3"/>
-    <light directional="true" pos="8 8 12" dir="-1 -1 -1" diffuse="0.4 0.4 0.4" specular="0.2 0.2 0.2"/>
-    <light directional="true" pos="-8 8 10" dir="1 -1 -1" diffuse="0.3 0.3 0.3"/>
+    <!-- 全局光源：确保整个房子有充足的光照 -->
+    <light pos="0 0 15" dir="0 0 -1" diffuse="0.6 0.6 0.6" specular="0.3 0.3 0.3" mode="fixed"/>
+    <light pos="8 8 12" dir="-1 -1 -1" diffuse="0.3 0.3 0.3" specular="0.1 0.1 0.1" mode="fixed"/>
+    <light pos="-8 8 10" dir="1 -1 -1" diffuse="0.2 0.2 0.2" mode="fixed"/>
 
     <!-- 地板 -->
-    <geom name="main_floor" type="plane" pos="0 0 0" size="20 20 0.1" material="floor_wood"/>
+    <geom name="main_floor" type="plane" pos="0 0 0" size="20 20 0.1" material="floor_wood" condim="1"/>
 
     <!-- ========== 外墙结构 (12m x 10m) ========== -->
     <body name="exterior">
@@ -95,251 +150,1453 @@
       <geom name="wall_west" type="box" pos="-6 0 1.4" size="0.12 6 1.4" material="wall_neutral"/>
     </body>
 
-    <!-- ========== 客厅 (南部, 6m x 4m) ========== -->
+    <!-- ========== 客厅 (南部, 约5m x 5m) ========== -->
     <body name="living_room">
-      <!-- 客厅北墙（与走廊分隔，留门洞） -->
-      <geom name="living_wall_n1" type="box" pos="-2.5 -1 1.4" size="1.5 0.1 1.4" material="wall_living"/>
-      <geom name="living_wall_n2" type="box" pos="2.5 -1 1.4" size="1.5 0.1 1.4" material="wall_living"/>
+      <!-- 客厅北墙（与走廊分隔，留门洞0.8m，中心x=0） -->
+      <geom name="living_wall_n1" type="box" pos="-1.4 -1 1.4" size="0.98 0.12 1.4" material="wall_living"/>
+      <geom name="living_wall_n2" type="box" pos="1.4 -1 1.4" size="0.98 0.12 1.4" material="wall_living"/>
+      <!-- 客厅东墙（内墙） -->
+      <geom name="living_wall_e" type="box" pos="2.5 -3.5 1.4" size="0.12 2.38 1.4" material="wall_living"/>
 
-      <!-- 地毯 -->
-      <geom name="living_carpet" type="box" pos="0 -3.5 0.01" size="2.2 1.8 0.01" material="carpet_living"/>
+      <!-- 地毯：位于客厅中央，增加舒适度 -->
+      <!-- pos="0 -3.5 0.01" 地毯位置坐标 -->
+      <!-- size="2 1.8 0.01" 地毯尺寸：长4m x 宽3.6m -->
+      <geom name="living_carpet" type="box" pos="0 -3.5 0.01" size="2 1.8 0.01" material="carpet_living"/>
 
-      <!-- L型沙发 -->
-      <body name="sofa_main" pos="-2.8 -4.5 0.25">
-        <geom type="box" size="1.3 0.4 0.25" material="sofa_blue"/>
-        <geom type="box" pos="0 -0.32 0.35" size="1.3 0.08 0.35" material="sofa_blue"/>
+      <!-- L型沙发（面向南墙电视） -->
+      <!-- 主沙发段（横向，靠西） -->
+      <!-- pos="-0.8 -2.5 0.25" 沙发位置坐标 -->
+      <!-- size="1.2 0.4 0.25" 沙发座尺寸：长2.4m x 宽0.8m x 高0.5m -->
+      <body name="sofa_main" pos="1.55 -2.8 0.25">
+        <geom type="box" size="0.8 0.4 0.25" material="sofa_blue"/><!-- 沙发座 -->
+        <geom type="box" pos="0 0.32 0.35" size="0.8 0.08 0.35" material="sofa_blue"/><!-- 沙发靠背 -->
       </body>
-      <body name="sofa_side" pos="-1.1 -4.5 0.25">
-        <geom type="box" size="0.4 0.4 0.25" material="sofa_blue"/>
-        <geom type="box" pos="0 -0.32 0.35" size="0.4 0.08 0.35" material="sofa_blue"/>
-      </body>
-      <body name="sofa_chaise" pos="0.4 -4.5 0.25">
-        <geom type="box" size="1.2 0.4 0.25" material="sofa_blue"/>
-        <geom type="box" pos="0 -0.32 0.35" size="1.2 0.08 0.35" material="sofa_blue"/>
-      </body>
-
-      <!-- 茶几 -->
-      <body name="coffee_table" pos="0 -3 0">
-        <geom type="box" pos="0 0 0.35" size="0.6 0.45 0.025" material="glass"/>
-        <geom type="cylinder" pos="-0.5 -0.35 0.175" size="0.015 0.175" material="metal"/>
-        <geom type="cylinder" pos="0.5 -0.35 0.175" size="0.015 0.175" material="metal"/>
-        <geom type="cylinder" pos="-0.5 0.35 0.175" size="0.015 0.175" material="metal"/>
-        <geom type="cylinder" pos="0.5 0.35 0.175" size="0.015 0.175" material="metal"/>
+      <!-- 贵妃位（横向延伸） -->
+      <!-- pos="0.8 -2.5 0.25" 贵妃位位置坐标 -->
+      <!-- size="1.0 0.4 0.25" 贵妃位尺寸：长2.0m x 宽0.8m x 高0.5m -->
+      <body name="sofa_chaise" pos="0.15 -2.8 0.25">
+        <geom type="box" size="0.6 0.4 0.25" material="sofa_blue"/><!-- 贵妃位座 -->
+        <geom type="box" pos="0 0.32 0.35" size="0.6 0.08 0.35" material="sofa_blue"/><!-- 贵妃位靠背 -->
       </body>
 
-      <!-- 电视柜 -->
-      <body name="tv_unit" pos="2.5 -5.7 0.3">
-        <geom type="box" size="1.4 0.3 0.3" material="wood_dark"/>
+      <!-- 茶几：位于沙发前，用于放置物品 -->
+      <!-- pos="0 -3.8 0" 茶几位置坐标 -->
+      <body name="coffee_table" pos="1 -3.8 0">
+        <geom type="box" pos="0 0 0.35" size="0.6 0.45 0.025" material="glass"/><!-- 玻璃桌面，高0.7m -->
+        <geom type="cylinder" pos="-0.5 -0.35 0.175" size="0.015 0.175" material="metal"/><!-- 桌腿 -->
+        <geom type="cylinder" pos="0.5 -0.35 0.175" size="0.015 0.175" material="metal"/><!-- 桌腿 -->
+        <geom type="cylinder" pos="-0.5 0.35 0.175" size="0.015 0.175" material="metal"/><!-- 桌腿 -->
+        <geom type="cylinder" pos="0.5 0.35 0.175" size="0.015 0.175" material="metal"/><!-- 桌腿 -->
       </body>
 
-      <!-- 电视 -->
-      <body name="tv" pos="2.5 -5.65 1.1">
-        <geom type="box" size="0.65 0.04 0.38" material="black_plastic"/>
+      <!-- 电视柜（靠南墙） -->
+      <body name="tv_unit" pos="1.1 -5.4 0.3">
+        <geom type="box" size="1.2 0.28 0.3" material="wood_dark"/>
       </body>
 
-      <!-- 餐桌 -->
-      <body name="dining_table" pos="2 -2 0">
-        <geom type="box" pos="0 0 0.73" size="0.9 0.65 0.03" material="wood_dark"/>
-        <geom type="cylinder" pos="0 0 0.365" size="0.08 0.365" material="metal"/>
+      <!-- 电视（面向沙发） -->
+      <body name="tv" pos="1.1 -5.35 1.1">
+        <geom type="box" size="0.6 0.04 0.36" material="black_plastic"/>
       </body>
 
-      <!-- 餐椅 -->
-      <body name="chair_1" pos="2 -1 0.25">
-        <geom type="box" size="0.2 0.2 0.02" material="wood_light"/>
-        <geom type="box" pos="0 -0.15 0.25" size="0.2 0.03 0.25" material="wood_light"/>
-      </body>
-      <body name="chair_2" pos="2 -3 0.25">
-        <geom type="box" size="0.2 0.2 0.02" material="wood_light"/>
-        <geom type="box" pos="0 0.15 0.25" size="0.2 0.03 0.25" material="wood_light"/>
+      <!-- 餐桌：位于客厅东侧，用于用餐 -->
+      <!-- pos="1.5 -1.8 0" 餐桌位置坐标 -->
+      <body name="dining_table" pos="-1.6 -1.8 0">
+        <geom type="box" pos="0 0 0.73" size="0.7 0.6 0.03" material="wood_dark"/><!-- 餐桌桌面，高1.46m -->
+        <geom type="cylinder" pos="0 0 0.365" size="0.08 0.365" material="metal"/><!-- 餐桌中心支柱 -->
       </body>
 
-      <!-- 边柜 -->
-      <body name="sideboard" pos="-4 -2.5 0.45">
-        <geom type="box" size="0.3 1 0.45" material="wood_dark"/>
+      <!-- 餐椅：餐桌两侧的椅子 -->
+      <!-- 左侧餐椅 -->
+      <body name="chair_1" pos="-2.0 -2.6 0.3" euler="0 0 3.14159">
+        <!-- 椅子部件 -->
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part0" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part4" pos="-0.115872764806656 -0.026949470625791998 -0.05861101639219199" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part3" pos="-0.115872961577472 0.12518058795264 0.244362872590848" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part2" pos="-0.115872961577472 0.10729661295513598 0.12332352378931201" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part1" pos="-0.231745536 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+      </body>
+      <!-- 右侧餐椅 -->
+      <body name="chair_2" pos="-1.4 -2.6 0.3" euler="0 0 3.14159">
+        <!-- 椅子部件 -->
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part0" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part4" pos="-0.115872764806656 -0.026949470625791998 -0.05861101639219199" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part3" pos="-0.115872961577472 0.12518058795264 0.244362872590848" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part2" pos="-0.115872961577472 0.10729661295513598 0.12332352378931201" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="chair_part1" pos="-0.231745536 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
       </body>
 
-      <!-- 绿植 -->
-      <body name="plant_1" pos="-4 -4.5 0.9">
-        <geom type="cylinder" size="0.12 0.02" material="wood_dark"/>
-        <geom type="sphere" pos="0 0 0.15" size="0.18" material="accent_green"/>
+      <!-- 边柜：客厅西侧的储物家具 -->
+      <!-- pos="-2.1 -2 0.45" 边柜位置坐标 -->
+      <!-- size="0.25 0.8 0.45" 边柜尺寸：长0.5m x 宽1.6m x 高0.9m -->
+      <!-- 电视柜替换边柜 -->
+      <body name="sideboard" pos="-0.7 -3.5 0.15" euler="0 0 1.5708">
+        <!-- 电视柜部件 -->
+        <geom conaffinity="0" contype="0" density="0" mesh="tvunit_part0" pos="0.0 0.0 -0.132" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="tvunit_part1" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="tvunit_part2" pos="-0.336 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="tvunit_part3" pos="0.3372 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="tvunit_part4" pos="0.0 0.0 0.1348" rgba="0.82 0.71 0.55 1" type="mesh" />
       </body>
 
-      <!-- 吸顶灯 -->
-      <body name="ceiling_light_living" pos="0 -3 2.7">
-        <geom type="cylinder" size="0.25 0.06" rgba="0.95 0.95 0.92 0.85"/>
-        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.7 0.7 0.65" specular="0.3 0.3 0.3" cutoff="75"/>
+      <!-- 绿植：客厅西南角的装饰植物 -->
+      <!-- pos="-2.1 -4.8 0.9" 植物位置坐标 -->
+      <body name="plant_1" pos="-2.1 -4.8 0">
+        <geom type="cylinder" size="0.15 0.03" material="wood_dark"/><!-- 花盆 -->
+        <!-- 植物茎干 -->
+        <geom type="cylinder" pos="0 0 0.2" size="0.02 0.15" material="wood_light"/>
+        <!-- 植物枝叶 - 多层结构 -->
+        <geom type="sphere" pos="0 0.1 0.35" size="0.15" material="accent_green"/><!-- 右上枝叶 -->
+        <geom type="sphere" pos="0 -0.1 0.35" size="0.12" material="accent_green"/><!-- 右下枝叶 -->
+        <geom type="sphere" pos="-0.1 0 0.35" size="0.13" material="accent_green"/><!-- 左枝叶 -->
+        <geom type="sphere" pos="0 0 0.45" size="0.18" material="accent_green"/><!-- 顶部枝叶 -->
+        <!-- 深绿色点缀 -->
+        <geom type="sphere" pos="0.05 0.05 0.4" size="0.08" rgba="0.25 0.55 0.32 1"/>
+        <geom type="sphere" pos="-0.05 -0.05 0.4" size="0.06" rgba="0.25 0.55 0.32 1"/>
       </body>
+
+
+
     </body>
 
     <!-- ========== 主卧 (东北, 3.5m x 3.5m) ========== -->
     <body name="master_bedroom">
-      <!-- 西墙（留门洞） -->
-      <geom name="mbr_wall_w1" type="box" pos="2.5 2.5 1.4" size="0.1 1.5 1.4" material="wall_bedroom"/>
-      <geom name="mbr_wall_w2" type="box" pos="2.5 4.5 1.4" size="0.1 1 1.4" material="wall_bedroom"/>
-      <!-- 南墙 -->
-      <geom name="mbr_wall_s" type="box" pos="4.25 1 1.4" size="1.75 0.1 1.4" material="wall_bedroom"/>
+      <!-- 西墙（完整墙） -->
+      <geom name="mbr_wall_w" type="box" pos="2.5 3.5 1.4" size="0.12 2.5 1.4" material="wall_bedroom"/>
+      <!-- 南墙（留门洞，门洞宽0.8m，中心x=4.2） -->
+      <geom name="mbr_wall_s1" type="box" pos="3.25 1 1.4" size="0.85 0.12 1.4" material="wall_bedroom"/>
+      <geom name="mbr_wall_s2" type="box" pos="5.4 1 1.4" size="0.5 0.12 1.4" material="wall_bedroom"/>
 
-      <!-- 双人床 -->
-      <body name="master_bed" pos="4.3 4.5 0">
-        <geom type="box" pos="0 0 0.2" size="0.95 1.3 0.2" material="bed_frame"/>
-        <geom type="box" pos="0 0 0.42" size="0.9 1.25 0.12" material="bed_sheet_master"/>
-        <geom type="box" pos="0 -1.35 0.65" size="0.95 0.08 0.45" material="wood_cherry"/>
-        <geom type="box" pos="0 0.25 0.56" size="0.85 0.75 0.02" material="blanket_blue"/>
+      <!-- 双人床：主卧的主要家具 -->
+      <!-- pos="4.3 4.5 0" 床位置坐标 -->
+      <body name="master_bed" pos="4.3 4.5 0" euler="0 0 3.1416">
+        <geom type="box" pos="0 0 0.2" size="0.95 1.3 0.2" material="bed_frame"/><!-- 床架，高0.4m -->
+        <geom type="box" pos="0 0 0.42" size="0.9 1.25 0.12" material="bed_sheet_master"/><!-- 床单，高0.84m -->
+        <geom type="box" pos="0 -1.35 0.65" size="0.95 0.08 0.45" material="wood_cherry"/><!-- 床头板，高1.3m -->
+        <geom type="box" pos="0 0.25 0.56" size="0.85 0.75 0.02" material="blanket_blue"/><!-- 被子，高1.12m -->
       </body>
 
-      <!-- 床头柜 -->
-      <body name="nightstand_left" pos="3.1 4.5 0.28">
-        <geom type="box" size="0.22 0.3 0.28" material="wood_dark"/>
+      <!-- 床头柜：床两侧的小柜子 -->
+      <!-- 左侧床头柜 -->
+      <body name="nightstand_left" pos="3.1 5.4 0.28">
+        <geom type="box" size="0.22 0.3 0.28" material="wood_dark"/><!-- 床头柜主体，高0.56m -->
         <body name="lamp_left" pos="0 0 0.58">
-          <geom type="cylinder" size="0.07 0.01" rgba="0.95 0.92 0.88 0.75"/>
-          <geom type="cylinder" pos="0 0 -0.1" size="0.012 0.1" material="metal"/>
-          <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.4 0.35 0.3" cutoff="50"/>
+          <geom type="cylinder" size="0.07 0.01" rgba="0.95 0.92 0.88 0.75"/><!-- 台灯灯罩 -->
+          <geom type="cylinder" pos="0 0 -0.1" size="0.012 0.1" material="metal"/><!-- 台灯灯杆 -->
+          <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.4 0.35 0.3"/><!-- 台灯光源 -->
         </body>
       </body>
-      <body name="nightstand_right" pos="5.5 4.5 0.28">
-        <geom type="box" size="0.22 0.3 0.28" material="wood_dark"/>
+      <!-- 右侧床头柜 -->
+      <body name="nightstand_right" pos="5.5 5.4 0.28">
+        <geom type="box" size="0.22 0.3 0.28" material="wood_dark"/><!-- 床头柜主体，高0.56m -->
         <body name="lamp_right" pos="0 0 0.58">
-          <geom type="cylinder" size="0.07 0.01" rgba="0.95 0.92 0.88 0.75"/>
-          <geom type="cylinder" pos="0 0 -0.1" size="0.012 0.1" material="metal"/>
-          <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.4 0.35 0.3" cutoff="50"/>
+          <geom type="cylinder" size="0.07 0.01" rgba="0.95 0.92 0.88 0.75"/><!-- 台灯灯罩 -->
+          <geom type="cylinder" pos="0 0 -0.1" size="0.012 0.1" material="metal"/><!-- 台灯灯杆 -->
+          <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.4 0.35 0.3"/><!-- 台灯光源 -->
         </body>
       </body>
 
-      <!-- 衣柜 -->
-      <body name="wardrobe_master" pos="5.6 1.8 1.05">
-        <geom type="box" size="0.28 1.2 1.05" material="wood_dark"/>
+      <!-- 衣柜：主卧的储物家具 -->
+      <!-- pos="5.6 1.8 1.05" 衣柜位置坐标 -->
+      <!-- size="0.28 1.2 1.05" 衣柜尺寸：长0.56m x 宽2.4m x 高2.1m -->
+      <body name="wardrobe_master" pos="5.6 2.1 1.05">
+        <!-- 衣柜主体 -->
+        <geom type="box" size="0.28 0.9 1.05" material="wood_dark"/><!-- 保持原尺寸 -->
+        
+        <!-- 明显的柜门分隔 -->
+        <geom type="box" pos="0 0 0.5" size="0.28 0.02 1.0" material="wood_light"/><!-- 左右门分隔线 -->
+        <geom type="box" pos="0 -0.25 0.75" size="0.28 0.02 0.5" material="wood_light"/><!-- 上半部分分隔线 -->
+        <geom type="box" pos="0 0.25 0.75" size="0.28 0.02 0.5" material="wood_light"/><!-- 上半部分分隔线 -->
+        <geom type="box" pos="0 -0.25 0.3" size="0.28 0.02 0.4" material="wood_light"/><!-- 下半部分分隔线 -->
+        <geom type="box" pos="0 0.25 0.3" size="0.28 0.02 0.4" material="wood_light"/><!-- 下半部分分隔线 -->
+        
+        <!-- 抽屉面板 -->
+        <geom type="box" pos="0 -0.4 0.25" size="0.26 0.15 0.05" material="cabinet_white"/><!-- 左下抽屉 -->
+        <geom type="box" pos="0 -0.1 0.25" size="0.26 0.15 0.05" material="cabinet_white"/><!-- 左上抽屉 -->
+        <geom type="box" pos="0 0.2 0.25" size="0.26 0.15 0.05" material="cabinet_white"/><!-- 右上抽屉 -->
+        <geom type="box" pos="0 0.5 0.25" size="0.26 0.15 0.05" material="cabinet_white"/><!-- 右下抽屉 -->
+        
+        <!-- 柜门 -->
+        <geom type="box" pos="0 -0.4 0.75" size="0.26 0.15 0.5" material="cabinet_white"/><!-- 左上门 -->
+        <geom type="box" pos="0 -0.1 0.75" size="0.26 0.15 0.5" material="cabinet_white"/><!-- 左下门 -->
+        <geom type="box" pos="0 0.2 0.75" size="0.26 0.15 0.5" material="cabinet_white"/><!-- 右上门 -->
+        <geom type="box" pos="0 0.5 0.75" size="0.26 0.15 0.5" material="cabinet_white"/><!-- 右上门 -->
+        
+        <!-- 明显的门把手 -->
+        <geom type="cylinder" pos="-0.1 -0.4 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 左上门把手 -->
+        <geom type="cylinder" pos="-0.1 -0.1 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 左下门把手 -->
+        <geom type="cylinder" pos="0.1 -0.4 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 右上门把手 -->
+        <geom type="cylinder" pos="0.1 -0.1 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 右下门把手 -->
+        <geom type="cylinder" pos="0.1 0.2 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 右上门把手 -->
+        <geom type="cylinder" pos="0.1 0.5 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 右上门把手 -->
+        <geom type="cylinder" pos="-0.1 0.2 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 左上门把手 -->
+        <geom type="cylinder" pos="-0.1 0.5 0.9" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 左上门把手 -->
+        
+        <!-- 抽屉拉手 -->
+        <geom type="cylinder" pos="-0.1 -0.4 0.28" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 左下抽屉拉手 -->
+        <geom type="cylinder" pos="-0.1 -0.1 0.28" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 左上抽屉拉手 -->
+        <geom type="cylinder" pos="0.1 0.2 0.28" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 右上抽屉拉手 -->
+        <geom type="cylinder" pos="0.1 0.5 0.28" size="0.02 0.05" material="metal" euler="0 1.57 0"/><!-- 右下抽屉拉手 -->
       </body>
 
       <!-- 地毯 -->
       <geom name="mbr_carpet" type="box" pos="4.2 4.5 0.01" size="1.3 1.6 0.01" material="carpet_bedroom"/>
 
-      <!-- 吸顶灯 -->
-      <body name="ceiling_light_mbr" pos="4 3.5 2.7">
-        <geom type="cylinder" size="0.22 0.05" rgba="0.95 0.95 0.92 0.85"/>
-        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.65 0.65 0.62" cutoff="70"/>
+
+    </body>
+
+    <!-- ========== 书房 (主卧和次卧之间) ========== -->
+    <body name="study_room">
+      <!-- 南墙（靠近走廊的墙壁）- 分割为两部分，留出门洞 -->
+      <geom name="study_wall_s1" type="box" pos="-1.38 1 1.4" size="1.02 0.12 1.4" material="wall_bedroom"/>
+      <geom name="study_wall_s2" type="box" pos="1.38 1 1.4" size="1.02 0.12 1.4" material="wall_bedroom"/>
+
+
+
+      <!-- 书柜：靠东侧墙 -->
+      <!-- 东侧北书柜 -->
+      <body name="bookshelf_east_north" pos="2.3 4.5 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_north_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_north_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_north_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_north_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_north_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_north_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_north_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_north_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.1 0 0.03" size="0.02 0.08 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.8 0.1 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.03 0.085 0.02" rgba="0.8 0.1 0.8 1"/>
+        </body>
+        <body name="bookshelf_east_north_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_north_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.02 0.08 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.025 0.09 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.07 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_east_north_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_north_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.07 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_east_north_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_north_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.085 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.8 0.1 1"/>
+        </body>
+        <body name="bookshelf_east_north_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_north_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_north_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_north_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_north_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_north_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_north_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_north_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
       </body>
+      <!-- 东侧南书柜 -->
+      <body name="bookshelf_east_south" pos="2.3 2.5 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_south_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_south_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_south_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_south_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_south_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_south_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_south_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_south_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.16 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.2 0.2 1"/>
+          <geom type="box" pos="-0.11 0 0.03" size="0.025 0.09 0.02" rgba="0.2 0.2 0.8 1"/>
+          <geom type="box" pos="-0.06 0 0.03" size="0.02 0.08 0.02" rgba="0.2 0.8 0.2 1"/>
+          <geom type="box" pos="-0.01 0 0.03" size="0.03 0.1 0.02" rgba="0.8 0.8 0.2 1"/>
+          <geom type="box" pos="0.04 0 0.03" size="0.02 0.075 0.02" rgba="0.8 0.2 0.8 1"/>
+        </body>
+        <body name="bookshelf_east_south_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_south_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.09 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.08 0.02" rgba="0.1 0.6 0.8 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.07 0.02" rgba="0.9 0.7 0.1 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.1 0.6 1"/>
+        </body>
+        <body name="bookshelf_east_south_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_south_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.7 0.6 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.09 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.03 0.07 0.02" rgba="0.3 0.6 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.7 0.5 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_south_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_south_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.085 0.02" rgba="0.3 0.8 0.5 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.4 0.5 0.9 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.6 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_south_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_south_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_south_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_south_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_south_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_south_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_south_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_south_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 东侧新书柜1 -->
+      <body name="bookshelf_east_1" pos="2.3 3.5 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_1_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_1_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_1_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_1_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_1_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_1_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_1_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_1_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.02 0.075 0.02" rgba="0.8 0.2 0.2 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.2 0.8 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.02 0.09 0.02" rgba="0.2 0.8 0.2 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.03 0.07 0.02" rgba="0.8 0.8 0.2 1"/>
+          <geom type="box" pos="0.06 0 0.03" size="0.025 0.085 0.02" rgba="0.8 0.2 0.8 1"/>
+        </body>
+        <body name="bookshelf_east_1_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_1_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.025 0.08 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.07 0 0.03" size="0.02 0.09 0.02" rgba="0.1 0.6 0.8 1"/>
+          <geom type="box" pos="-0.02 0 0.03" size="0.03 0.07 0.02" rgba="0.9 0.7 0.1 1"/>
+          <geom type="box" pos="0.03 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.1 0.6 1"/>
+        </body>
+        <body name="bookshelf_east_1_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_1_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.02 0.08 0.02" rgba="0.3 0.8 0.5 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.025 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.03 0.075 0.02" rgba="0.4 0.5 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.8 0.6 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_1_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_1_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.085 0.02" rgba="0.6 0.4 0.8 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.07 0.02" rgba="0.2 0.8 0.6 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.08 0.02" rgba="0.3 0.6 0.9 1"/>
+        </body>
+        <body name="bookshelf_east_1_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_1_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_1_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_1_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_1_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_1_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_1_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_1_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 北墙书柜：复制东侧书柜，面朝书房门 -->
+      <!-- 北墙西书柜 -->
+      <body name="bookshelf_north_west" pos="-1.8 5.7 0.457" quat="0 0 1 0">
+        <body name="bookshelf_north_west_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_north_west_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_west_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_west_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_north_west_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.1 0 0.03" size="0.02 0.08 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.8 0.1 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.03 0.085 0.02" rgba="0.8 0.1 0.8 1"/>
+        </body>
+        <body name="bookshelf_north_west_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_north_west_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.02 0.08 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.025 0.09 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.07 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_west_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_north_west_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.07 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_west_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_north_west_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.085 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.8 0.1 1"/>
+        </body>
+        <body name="bookshelf_north_west_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_north_west_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_north_west_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_north_west_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_north_west_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 北墙西中书柜 -->
+      <body name="bookshelf_north_west_center" pos="-0.9 5.7 0.457" quat="0 0 1 0">
+        <body name="bookshelf_north_west_center_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_north_west_center_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_center_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_west_center_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_center_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_west_center_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_center_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_north_west_center_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.1 0 0.03" size="0.02 0.08 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.8 0.1 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.03 0.085 0.02" rgba="0.8 0.1 0.8 1"/>
+        </body>
+        <body name="bookshelf_north_west_center_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_north_west_center_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.02 0.08 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.025 0.09 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.07 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_west_center_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_north_west_center_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.07 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_west_center_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_north_west_center_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.085 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.8 0.1 1"/>
+        </body>
+        <body name="bookshelf_north_west_center_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_north_west_center_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_center_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_north_west_center_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_center_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_north_west_center_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_west_center_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_north_west_center_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 北墙中书柜 -->
+      <body name="bookshelf_north_center" pos="0 5.7 0.457" quat="0 0 1 0">
+        <body name="bookshelf_north_center_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_north_center_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_center_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_center_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_north_center_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.02 0.075 0.02" rgba="0.8 0.2 0.2 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.2 0.8 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.02 0.09 0.02" rgba="0.2 0.8 0.2 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.03 0.07 0.02" rgba="0.8 0.8 0.2 1"/>
+          <geom type="box" pos="0.06 0 0.03" size="0.025 0.085 0.02" rgba="0.8 0.2 0.8 1"/>
+        </body>
+        <body name="bookshelf_north_center_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_north_center_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.025 0.08 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.07 0 0.03" size="0.02 0.09 0.02" rgba="0.1 0.6 0.8 1"/>
+          <geom type="box" pos="-0.02 0 0.03" size="0.03 0.07 0.02" rgba="0.9 0.7 0.1 1"/>
+          <geom type="box" pos="0.03 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.1 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_center_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_north_center_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.02 0.08 0.02" rgba="0.3 0.8 0.5 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.025 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.03 0.075 0.02" rgba="0.4 0.5 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.8 0.6 0.2 1"/>
+        </body>
+        <body name="bookshelf_north_center_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_north_center_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.085 0.02" rgba="0.6 0.4 0.8 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.07 0.02" rgba="0.2 0.8 0.6 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.08 0.02" rgba="0.3 0.6 0.9 1"/>
+        </body>
+        <body name="bookshelf_north_center_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_north_center_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_north_center_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_north_center_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_north_center_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 北墙中东书柜 -->
+      <body name="bookshelf_north_center_east" pos="0.9 5.7 0.457" quat="0 0 1 0">
+        <body name="bookshelf_north_center_east_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_north_center_east_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_east_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_center_east_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_east_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_center_east_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_east_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_north_center_east_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.1 0 0.03" size="0.02 0.08 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.8 0.1 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.03 0.085 0.02" rgba="0.8 0.1 0.8 1"/>
+        </body>
+        <body name="bookshelf_north_center_east_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_north_center_east_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.02 0.08 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.025 0.09 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.1 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.07 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_center_east_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_north_center_east_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.6 0.8 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.07 0.02" rgba="0.9 0.7 0.2 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.2 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_center_east_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_north_center_east_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.085 0.02" rgba="0.1 0.8 0.1 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.1 0.1 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.09 0.02" rgba="0.1 0.1 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.8 0.1 1"/>
+        </body>
+        <body name="bookshelf_north_center_east_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_north_center_east_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_east_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_north_center_east_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_east_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_north_center_east_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_center_east_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_north_center_east_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 北墙东书柜 -->
+      <body name="bookshelf_north_east" pos="1.8 5.7 0.457" quat="0 0 1 0">
+        <body name="bookshelf_north_east_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_north_east_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_east_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_east_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_east_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_north_east_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_east_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_north_east_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.16 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.2 0.2 1"/>
+          <geom type="box" pos="-0.11 0 0.03" size="0.025 0.09 0.02" rgba="0.2 0.2 0.8 1"/>
+          <geom type="box" pos="-0.06 0 0.03" size="0.02 0.08 0.02" rgba="0.2 0.8 0.2 1"/>
+          <geom type="box" pos="-0.01 0 0.03" size="0.03 0.1 0.02" rgba="0.8 0.8 0.2 1"/>
+          <geom type="box" pos="0.04 0 0.03" size="0.02 0.075 0.02" rgba="0.8 0.2 0.8 1"/>
+        </body>
+        <body name="bookshelf_north_east_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_north_east_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.09 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.08 0.02" rgba="0.1 0.6 0.8 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.07 0.02" rgba="0.9 0.7 0.1 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.1 0.6 1"/>
+        </body>
+        <body name="bookshelf_north_east_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_north_east_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.7 0.6 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.09 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.03 0.07 0.02" rgba="0.3 0.6 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.7 0.5 0.2 1"/>
+        </body>
+        <body name="bookshelf_north_east_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_north_east_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.03 0.085 0.02" rgba="0.3 0.8 0.5 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.025 0.09 0.02" rgba="0.4 0.5 0.9 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.6 0.2 1"/>
+        </body>
+        <body name="bookshelf_north_east_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_north_east_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_east_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_north_east_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_east_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_north_east_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_north_east_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_north_east_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 东侧新书柜2 -->
+      <body name="bookshelf_east_2" pos="2.3 4.0 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_2_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_2_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_2_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_2_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_2_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_2_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_2_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_2_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.025 0.085 0.02" rgba="0.7 0.3 0.1 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.07 0.02" rgba="0.1 0.6 0.8 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.03 0.09 0.02" rgba="0.9 0.7 0.1 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.08 0.02" rgba="0.4 0.1 0.6 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.025 0.075 0.02" rgba="0.2 0.8 0.7 1"/>
+        </body>
+        <body name="bookshelf_east_2_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_2_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.03 0.08 0.02" rgba="0.2 0.8 0.3 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.025 0.07 0.02" rgba="0.3 0.5 0.9 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.8 0.5 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_2_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_2_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.025 0.085 0.02" rgba="0.2 0.7 0.6 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.07 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.09 0.02" rgba="0.3 0.6 0.9 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.08 0.02" rgba="0.7 0.5 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_2_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_2_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.08 0.02" rgba="0.3 0.8 0.4 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.075 0.02" rgba="0.4 0.5 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.8 0.6 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_2_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_2_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_2_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_2_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_2_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_2_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_2_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_2_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 东侧新书柜3 -->
+      <body name="bookshelf_east_3" pos="2.3 3.0 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_3_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_3_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_3_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_3_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_3_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_3_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_3_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_3_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.16 0 0.03" size="0.02 0.07 0.02" rgba="0.6 0.8 0.3 1"/>
+          <geom type="box" pos="-0.11 0 0.03" size="0.025 0.085 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.06 0 0.03" size="0.02 0.09 0.02" rgba="0.3 0.5 0.9 1"/>
+          <geom type="box" pos="-0.01 0 0.03" size="0.03 0.075 0.02" rgba="0.8 0.5 0.2 1"/>
+          <geom type="box" pos="0.04 0 0.03" size="0.025 0.08 0.02" rgba="0.4 0.7 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_3_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_3_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.08 0.02" rgba="0.2 0.8 0.7 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.09 0.02" rgba="0.7 0.2 0.5 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.07 0.02" rgba="0.8 0.6 0.3 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.3 0.7 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_3_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_3_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.025 0.09 0.02" rgba="0.3 0.7 0.5 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.03 0.075 0.02" rgba="0.7 0.3 0.9 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.8 0.2 1"/>
+        </body>
+        <body name="bookshelf_east_3_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_3_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.085 0.02" rgba="0.6 0.4 0.8 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.07 0.02" rgba="0.2 0.8 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.09 0.02" rgba="0.9 0.5 0.4 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.025 0.07 0.02" rgba="0.3 0.5 0.9 1"/>
+        </body>
+        <body name="bookshelf_east_3_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_3_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_3_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_3_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_3_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_3_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_3_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_3_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 东侧新书柜4 -->
+      <body name="bookshelf_east_4" pos="2.3 2.0 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_4_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_4_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_4_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_4_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_4_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_4_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_4_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_4_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_4_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_4_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_4_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_4_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_4_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 东侧新书柜5 -->
+      <body name="bookshelf_east_5" pos="2.3 5.0 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_5_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_5_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_5_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_5_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_5_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_5_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_5_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_5_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_5_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_5_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_5_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_5_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_5_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 东侧新书柜6 -->
+      <body name="bookshelf_east_6" pos="2.3 1.5 0.457" quat="-0.7071 0 0 0.7071">
+        <body name="bookshelf_east_6_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_east_6_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_6_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_east_6_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_east_6_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_east_6_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_east_6_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_east_6_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_east_6_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_east_6_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_east_6_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_east_6_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_east_6_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 书柜：靠西侧墙 -->
+      <!-- 西侧北书柜 -->
+      <body name="bookshelf_west_north" pos="-2.3 4.5 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_north_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_north_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_north_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_north_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_north_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.025 0.09 0.02" rgba="0.6 0.8 0.3 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.07 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.03 0.1 0.02" rgba="0.3 0.5 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.08 0.02" rgba="0.8 0.5 0.2 1"/>
+          <geom type="box" pos="0.06 0 0.03" size="0.025 0.085 0.02" rgba="0.4 0.7 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_north_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_north_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.03 0.1 0.02" rgba="0.2 0.8 0.7 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.08 0.02" rgba="0.7 0.2 0.5 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.025 0.09 0.02" rgba="0.8 0.6 0.3 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.07 0.02" rgba="0.3 0.7 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_north_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_north_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_north_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_north_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_north_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_north_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_north_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_north_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧南书柜 -->
+      <body name="bookshelf_west_south" pos="-2.3 2.5 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_south_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_south_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_south_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_south_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_south_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_south_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_south_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_south_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.025 0.08 0.02" rgba="0.6 0.8 0.3 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.03 0.07 0.02" rgba="0.3 0.5 0.9 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.1 0.02" rgba="0.8 0.5 0.2 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.025 0.085 0.02" rgba="0.4 0.7 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_south_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_south_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.03 0.08 0.02" rgba="0.2 0.8 0.7 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.7 0.2 0.5 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.025 0.07 0.02" rgba="0.8 0.6 0.3 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.3 0.7 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_south_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_south_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.03 0.08 0.02" rgba="0.8 0.4 0.2 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.3 0.7 0.5 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.025 0.075 0.02" rgba="0.7 0.3 0.9 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.8 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_south_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_south_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.025 0.085 0.02" rgba="0.6 0.4 0.8 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.03 0.07 0.02" rgba="0.2 0.8 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.02 0.09 0.02" rgba="0.9 0.5 0.4 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.025 0.07 0.02" rgba="0.3 0.5 0.9 1"/>
+        </body>
+        <body name="bookshelf_west_south_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_south_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_south_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_south_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_south_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_south_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_south_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_south_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧新书柜1 -->
+      <body name="bookshelf_west_1" pos="-2.3 3.5 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_1_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_1_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_1_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_1_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_1_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.15 0 0.03" size="0.025 0.08 0.02" rgba="0.8 0.4 0.2 1"/>
+          <geom type="box" pos="-0.10 0 0.03" size="0.02 0.09 0.02" rgba="0.3 0.7 0.5 1"/>
+          <geom type="box" pos="-0.05 0 0.03" size="0.03 0.075 0.02" rgba="0.7 0.3 0.9 1"/>
+          <geom type="box" pos="0 0 0.03" size="0.02 0.085 0.02" rgba="0.4 0.8 0.2 1"/>
+          <geom type="box" pos="0.05 0 0.03" size="0.025 0.07 0.02" rgba="0.6 0.4 0.8 1"/>
+        </body>
+        <body name="bookshelf_west_1_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_1_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.13 0 0.03" size="0.03 0.08 0.02" rgba="0.2 0.8 0.6 1"/>
+          <geom type="box" pos="-0.08 0 0.03" size="0.02 0.09 0.02" rgba="0.9 0.5 0.4 1"/>
+          <geom type="box" pos="-0.03 0 0.03" size="0.025 0.07 0.02" rgba="0.3 0.5 0.9 1"/>
+          <geom type="box" pos="0.02 0 0.03" size="0.02 0.085 0.02" rgba="0.7 0.6 0.3 1"/>
+        </body>
+        <body name="bookshelf_west_1_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_1_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_1_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_1_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_1_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_1_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_1_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_1_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧新书柜2 -->
+      <body name="bookshelf_west_2" pos="-2.3 4.0 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_2_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_2_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_2_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_2_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_2_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.16 0 0.03" size="0.02 0.085 0.02" rgba="0.8 0.5 0.2 1"/>
+          <geom type="box" pos="-0.11 0 0.03" size="0.025 0.07 0.02" rgba="0.3 0.6 0.9 1"/>
+          <geom type="box" pos="-0.06 0 0.03" size="0.03 0.09 0.02" rgba="0.7 0.3 0.8 1"/>
+          <geom type="box" pos="-0.01 0 0.03" size="0.02 0.08 0.02" rgba="0.4 0.8 0.3 1"/>
+          <geom type="box" pos="0.04 0 0.03" size="0.025 0.075 0.02" rgba="0.9 0.4 0.6 1"/>
+        </body>
+        <body name="bookshelf_west_2_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_2_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.025 0.08 0.02" rgba="0.6 0.8 0.3 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.03 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.02 0.07 0.02" rgba="0.3 0.5 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.025 0.085 0.02" rgba="0.8 0.5 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_2_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_2_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_2_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_2_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_2_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_2_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_2_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_2_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧新书柜3 -->
+      <body name="bookshelf_west_3" pos="-2.3 3.0 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_3_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_3_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_3_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_3_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_3_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.14 0 0.03" size="0.03 0.08 0.02" rgba="0.3 0.8 0.5 1"/>
+          <geom type="box" pos="-0.09 0 0.03" size="0.02 0.09 0.02" rgba="0.9 0.4 0.6 1"/>
+          <geom type="box" pos="-0.04 0 0.03" size="0.025 0.075 0.02" rgba="0.4 0.5 0.9 1"/>
+          <geom type="box" pos="0.01 0 0.03" size="0.02 0.085 0.02" rgba="0.8 0.6 0.2 1"/>
+          <geom type="box" pos="0.06 0 0.03" size="0.025 0.07 0.02" rgba="0.6 0.3 0.8 1"/>
+        </body>
+        <body name="bookshelf_west_3_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_3_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <!-- 书籍 -->
+          <geom type="box" pos="-0.12 0 0.03" size="0.025 0.08 0.02" rgba="0.2 0.7 0.6 1"/>
+          <geom type="box" pos="-0.07 0 0.03" size="0.03 0.09 0.02" rgba="0.8 0.4 0.3 1"/>
+          <geom type="box" pos="-0.02 0 0.03" size="0.02 0.07 0.02" rgba="0.3 0.6 0.9 1"/>
+          <geom type="box" pos="0.03 0 0.03" size="0.025 0.085 0.02" rgba="0.7 0.5 0.2 1"/>
+        </body>
+        <body name="bookshelf_west_3_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_3_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_3_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_3_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_3_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_3_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_3_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_3_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧新书柜4 -->
+      <body name="bookshelf_west_4" pos="-2.3 2.0 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_4_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_4_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_4_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_4_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_4_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_4_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_4_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_4_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_4_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_4_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_4_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_4_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_4_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧新书柜5 -->
+      <body name="bookshelf_west_5" pos="-2.3 5.0 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_5_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_5_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_5_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_5_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_5_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_5_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_5_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_5_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_5_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_5_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_5_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_5_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_5_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+      <!-- 西侧新书柜6 -->
+      <body name="bookshelf_west_6" pos="-2.3 1.5 0.457" quat="0.7071 0 0 0.7071">
+        <body name="bookshelf_west_6_0_part0" pos="-0.0 0.0 -0.0" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part0" name="bookshelf_west_6_0_part0_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_10_part10" pos="1.5e-09 -0.09372957270000001 -0.2831041687" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_6_10_part10_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_9_part9" pos="1.5e-09 -0.09372957270000001 -0.13917083435000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part9" name="bookshelf_west_6_9_part9_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_8_part8" pos="1.5e-09 -0.09372957270000001 0.29262917685" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part8" name="bookshelf_west_6_8_part8_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_7_part7" pos="1.5e-09 -0.09372957270000001 0.1486958191" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part7" name="bookshelf_west_6_7_part7_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_6_part6" pos="1.5e-09 -0.09372957270000001 0.4318000061" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part6" name="bookshelf_west_6_6_part6_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_5_part5" pos="1.5e-09 -0.09372957270000001 3.05e-09" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part4" name="bookshelf_west_6_5_part5_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_4_part4" pos="1.5e-09 -0.09372957270000001 -0.4318" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part3" name="bookshelf_west_6_4_part4_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_3_part3" pos="-0.193675 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part2" name="bookshelf_west_6_3_part3_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_2_part2" pos="1.5e-09 -0.16069047585000001 -0.4571999996" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part10" name="bookshelf_west_6_2_part2_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+        <body name="bookshelf_west_6_1_part1" pos="0.19367500615 -0.0904875086 -0.022224987800000002" quat="1 0 0 0">
+          <geom conaffinity="0" contype="0" density="0" mesh="part1" name="bookshelf_west_6_1_part1_mesh" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+
+
+      <!-- 书桌和椅子 -->
+      <!-- 东侧书桌 -->
+      <body name="desk_east" pos="1.2 3.5 0" euler="0 0 1.5708">
+        <geom type="box" pos="0 0 0.72" size="0.65 0.45 0.02" material="wood_dark"/><!-- 书桌桌面，高1.44m -->
+        <geom type="box" pos="-0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="-0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        
+        <!-- 书籍 -->
+        <geom type="box" pos="-0.2 0 0.75" size="0.03 0.15 0.02" rgba="0.2 0.6 0.8 1"/>
+        <geom type="box" pos="-0.1 0 0.75" size="0.025 0.12 0.02" rgba="0.7 0.3 0.1 1"/>
+        <geom type="box" pos="0 0 0.75" size="0.02 0.14 0.02" rgba="0.9 0.7 0.2 1"/>
+        <geom type="box" pos="0.1 0 0.75" size="0.03 0.11 0.02" rgba="0.4 0.2 0.6 1"/>
+        <geom type="box" pos="0.2 0 0.75" size="0.025 0.13 0.02" rgba="0.3 0.7 0.4 1"/>
+        
+        <!-- 东侧椅子 -->
+        <body name="chair_east" pos="0 1.8 0.2" euler="0 0 3.1416">
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part0" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part4" pos="-0.115872764806656 -0.026949470625791998 -0.05861101639219199" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part3" pos="-0.115872961577472 0.12518058795264 0.244362872590848" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part2" pos="-0.115872961577472 0.10729661295513598 0.12332352378931201" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part1" pos="-0.231745536 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 西侧书桌 -->
+      <body name="desk_west" pos="-1.2 3.5 0" euler="0 0 1.5708">
+        <geom type="box" pos="0 0 0.72" size="0.65 0.45 0.02" material="wood_dark"/><!-- 书桌桌面，高1.44m -->
+        <geom type="box" pos="-0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="-0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        
+        <!-- 书籍 -->
+        <geom type="box" pos="-0.2 0 0.75" size="0.025 0.13 0.02" rgba="0.6 0.4 0.8 1"/>
+        <geom type="box" pos="-0.1 0 0.75" size="0.03 0.11 0.02" rgba="0.2 0.8 0.6 1"/>
+        <geom type="box" pos="0 0 0.75" size="0.02 0.14 0.02" rgba="0.9 0.5 0.4 1"/>
+        <geom type="box" pos="0.1 0 0.75" size="0.025 0.12 0.02" rgba="0.3 0.5 0.9 1"/>
+        <geom type="box" pos="0.2 0 0.75" size="0.03 0.10 0.02" rgba="0.7 0.6 0.2 1"/>
+        
+        <!-- 西侧椅子 -->
+        <body name="chair_west" pos="0 -1.8 0.2">
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part0" pos="0.0 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part4" pos="-0.115872764806656 -0.026949470625791998 -0.05861101639219199" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part3" pos="-0.115872961577472 0.12518058795264 0.244362872590848" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part2" pos="-0.115872961577472 0.10729661295513598 0.12332352378931201" rgba="0.82 0.71 0.55 1" type="mesh" />
+          <geom conaffinity="0" contype="0" density="0" mesh="chair_part1" pos="-0.231745536 0.0 0.0" rgba="0.82 0.71 0.55 1" type="mesh" />
+        </body>
+      </body>
+
+      <!-- 地毯 -->
+      <geom name="study_carpet" type="box" pos="0 3.5 0.01" size="2 2 0.01" material="carpet_bedroom"/>
     </body>
 
     <!-- ========== 次卧 (西北, 3.5m x 3.5m) ========== -->
     <body name="bedroom_2">
-      <!-- 东墙（留门洞） -->
-      <geom name="br2_wall_e1" type="box" pos="-2.5 2.5 1.4" size="0.1 1.5 1.4" material="wall_bedroom"/>
-      <geom name="br2_wall_e2" type="box" pos="-2.5 4.5 1.4" size="0.1 1 1.4" material="wall_bedroom"/>
-      <!-- 南墙 -->
-      <geom name="br2_wall_s" type="box" pos="-4.25 1 1.4" size="1.75 0.1 1.4" material="wall_bedroom"/>
+      <!-- 东墙（完整墙） -->
+      <geom name="br2_wall_e" type="box" pos="-2.5 3.5 1.4" size="0.12 2.5 1.4" material="wall_bedroom"/>
+      <!-- 南墙（留门洞，门洞宽0.8m，中心x=-4.2） -->
+      <geom name="br2_wall_s1" type="box" pos="-5 1 1.4" size="0.88 0.12 1.4" material="wall_bedroom"/>
+      <geom name="br2_wall_s2" type="box" pos="-2.9 1 1.4" size="0.5 0.12 1.4" material="wall_bedroom"/>
 
-      <!-- 单人床 -->
-      <body name="bed_2" pos="-4.6 4.5 0">
-        <geom type="box" pos="0 0 0.18" size="0.55 0.95 0.18" material="bed_frame"/>
-        <geom type="box" pos="0 0 0.38" size="0.5 0.9 0.1" material="bed_sheet_2"/>
-        <geom type="box" pos="0 -1 0.58" size="0.55 0.08 0.38" material="wood_medium"/>
-        <geom type="box" pos="0 0.2 0.5" size="0.48 0.58 0.02" material="blanket_green"/>
+      <!-- 单人床：次卧的主要家具 -->
+      <!-- pos="-4.6 4.5 0" 床位置坐标 -->
+      <body name="bed_2" pos="-4.6 4.5 0" euler="0 0 3.1416">
+        <geom type="box" pos="0 0 0.18" size="0.55 0.95 0.18" material="bed_frame"/><!-- 床架，高0.36m -->
+        <geom type="box" pos="0 0 0.38" size="0.5 0.9 0.1" material="bed_sheet_2"/><!-- 床单，高0.76m -->
+        <geom type="box" pos="0 -1 0.58" size="0.55 0.08 0.38" material="wood_medium"/><!-- 床头板，高1.16m -->
+        <geom type="box" pos="0 0.2 0.5" size="0.48 0.58 0.02" material="blanket_green"/><!-- 被子，高1.0m -->
       </body>
 
-      <!-- 书桌 -->
-      <body name="study_desk_2" pos="-3.2 4.5 0">
-        <geom type="box" pos="0 0 0.72" size="0.65 0.45 0.02" material="wood_dark"/>
-        <geom type="box" pos="-0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
-        <geom type="box" pos="0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
-        <geom type="box" pos="-0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
-        <geom type="box" pos="0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/>
+      <!-- 书桌：次卧的学习和工作区域 -->
+      <!-- pos="-3.2 4.5 0" 书桌位置坐标 -->
+      <body name="study_desk_2" pos="-3.2 5.3 0">
+        <geom type="box" pos="0 0 0.72" size="0.65 0.45 0.02" material="wood_dark"/><!-- 书桌桌面，高1.44m -->
+        <geom type="box" pos="-0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="0.55 -0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="-0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
+        <geom type="box" pos="0.55 0.35 0.36" size="0.04 0.04 0.36" material="metal"/><!-- 书桌桌腿 -->
       </body>
 
-      <!-- 办公椅 -->
-      <body name="office_chair_2" pos="-3.2 3.8 0.25">
-        <geom type="cylinder" size="0.2 0.03" material="sofa_blue"/>
-        <geom type="box" pos="0 -0.12 0.23" size="0.2 0.04 0.23" material="sofa_blue"/>
+      <!-- 办公椅：书桌配套的椅子 -->
+      <!-- pos="-3.2 3.8 0.25" 椅子位置坐标 -->
+      <body name="office_chair_2" pos="-3.2 4.5 0.25">
+        <geom type="cylinder" size="0.2 0.03" material="sofa_blue"/><!-- 椅座 -->
+        <geom type="box" pos="0 -0.12 0.23" size="0.2 0.04 0.23" material="sofa_blue"/><!-- 椅背 -->
       </body>
 
-      <!-- 书架 -->
-      <body name="bookshelf_2" pos="-5.7 2.5 0.8">
-        <geom type="box" size="0.15 0.55 0.8" material="wood_dark"/>
+      <!-- 衣柜：次卧的储物家具 -->
+      <!-- pos="-5.7 2.5 0.8" 衣柜位置坐标 -->
+      <!-- size="0.15 0.55 0.8" 衣柜尺寸：长0.3m x 宽1.1m x 高1.6m -->
+      <body name="wardrobe_bedroom2" pos="-5.6 2.5 0.8">
+        <!-- 衣柜主体 -->
+        <geom type="box" size="0.15 0.55 0.8" material="wood_dark"/><!-- 保持原尺寸 -->
+        
+        <!-- 明显的柜门分隔 -->
+        <geom type="box" pos="0 0 0.4" size="0.15 0.02 0.8" material="wood_light"/><!-- 左右门分隔线 -->
+        <geom type="box" pos="0 -0.2 0.6" size="0.15 0.02 0.4" material="wood_light"/><!-- 上半部分分隔线 -->
+        <geom type="box" pos="0 0.2 0.6" size="0.15 0.02 0.4" material="wood_light"/><!-- 上半部分分隔线 -->
+        <geom type="box" pos="0 -0.2 0.25" size="0.15 0.02 0.3" material="wood_light"/><!-- 下半部分分隔线 -->
+        <geom type="box" pos="0 0.2 0.25" size="0.15 0.02 0.3" material="wood_light"/><!-- 下半部分分隔线 -->
+        
+        <!-- 抽屉面板 -->
+        <geom type="box" pos="0 -0.28 0.2" size="0.13 0.12 0.04" material="cabinet_white"/><!-- 左下抽屉 -->
+        <geom type="box" pos="0 -0.08 0.2" size="0.13 0.12 0.04" material="cabinet_white"/><!-- 左上抽屉 -->
+        <geom type="box" pos="0 0.12 0.2" size="0.13 0.12 0.04" material="cabinet_white"/><!-- 右上抽屉 -->
+        <geom type="box" pos="0 0.32 0.2" size="0.13 0.12 0.04" material="cabinet_white"/><!-- 右下抽屉 -->
+        
+        <!-- 柜门 -->
+        <geom type="box" pos="0 -0.28 0.6" size="0.13 0.12 0.4" material="cabinet_white"/><!-- 左上门 -->
+        <geom type="box" pos="0 -0.08 0.6" size="0.13 0.12 0.4" material="cabinet_white"/><!-- 左下门 -->
+        <geom type="box" pos="0 0.12 0.6" size="0.13 0.12 0.4" material="cabinet_white"/><!-- 右上门 -->
+        <geom type="box" pos="0 0.32 0.6" size="0.13 0.12 0.4" material="cabinet_white"/><!-- 右下门 -->
+        
+        <!-- 明显的门把手 -->
+        <geom type="cylinder" pos="-0.06 -0.28 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 左上门把手 -->
+        <geom type="cylinder" pos="-0.06 -0.08 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 左下门把手 -->
+        <geom type="cylinder" pos="0.06 -0.28 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 右上门把手 -->
+        <geom type="cylinder" pos="0.06 -0.08 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 右下门把手 -->
+        <geom type="cylinder" pos="0.06 0.12 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 右上门把手 -->
+        <geom type="cylinder" pos="0.06 0.32 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 右下门把手 -->
+        <geom type="cylinder" pos="-0.06 0.12 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 左上门把手 -->
+        <geom type="cylinder" pos="-0.06 0.32 0.75" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 左下门把手 -->
+        
+        <!-- 抽屉拉手 -->
+        <geom type="cylinder" pos="-0.06 -0.28 0.22" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 左下抽屉拉手 -->
+        <geom type="cylinder" pos="-0.06 -0.08 0.22" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 左上抽屉拉手 -->
+        <geom type="cylinder" pos="0.06 0.12 0.22" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 右上抽屉拉手 -->
+        <geom type="cylinder" pos="0.06 0.32 0.22" size="0.015 0.04" material="metal" euler="0 1.57 0"/><!-- 右下抽屉拉手 -->
       </body>
 
-      <!-- 吸顶灯 -->
-      <body name="ceiling_light_br2" pos="-4 3.5 2.7">
-        <geom type="cylinder" size="0.22 0.05" rgba="0.95 0.95 0.92 0.85"/>
-        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.65 0.65 0.62" cutoff="70"/>
-      </body>
+
     </body>
 
-    <!-- ========== 儿童房 (东南, 3m x 3m) ========== -->
-    <body name="bedroom_3">
-      <!-- 北墙（留门洞） -->
-      <geom name="br3_wall_n1" type="box" pos="3.2 -1 1.4" size="0.8 0.1 1.4" material="wall_bedroom"/>
-      <geom name="br3_wall_n2" type="box" pos="5 -1 1.4" size="1 0.1 1.4" material="wall_bedroom"/>
-      <!-- 西墙 -->
-      <geom name="br3_wall_w" type="box" pos="2.5 -2.5 1.4" size="0.1 1.5 1.4" material="wall_bedroom"/>
 
-      <!-- 儿童床 -->
-      <body name="bed_3" pos="5.3 -3.5 0">
-        <geom type="box" pos="0 0 0.15" size="0.5 0.85 0.15" material="wood_light"/>
-        <geom type="box" pos="0 0 0.32" size="0.45 0.8 0.08" material="bed_sheet_kids"/>
-        <geom type="box" pos="0 -0.88 0.45" size="0.5 0.05 0.18" material="wood_light"/>
-        <geom type="box" pos="0.48 0 0.45" size="0.03 0.8 0.18" material="wood_light"/>
-      </body>
-
-      <!-- 学习桌 -->
-      <body name="study_desk_3" pos="3.2 -3.5 0">
-        <geom type="box" pos="0 0 0.62" size="0.55 0.4 0.02" material="accent_yellow"/>
-        <geom type="box" pos="-0.45 -0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
-        <geom type="box" pos="0.45 -0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
-        <geom type="box" pos="-0.45 0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
-        <geom type="box" pos="0.45 0.3 0.31" size="0.04 0.04 0.31" material="metal"/>
-      </body>
-
-      <!-- 儿童椅 -->
-      <body name="kids_chair" pos="3.2 -2.9 0.18">
-        <geom type="box" size="0.13 0.13 0.02" material="accent_red"/>
-        <geom type="box" pos="0 -0.1 0.15" size="0.13 0.03 0.15" material="accent_red"/>
-      </body>
-
-      <!-- 玩具柜 -->
-      <body name="toy_cabinet" pos="5.5 -1.8 0.35">
-        <geom type="box" size="0.28 0.45 0.35" material="accent_yellow"/>
-      </body>
-
-      <!-- 吸顶灯 -->
-      <body name="ceiling_light_br3" pos="4.2 -2.5 2.7">
-        <geom type="sphere" size="0.18" rgba="0.95 0.9 0.5 0.8"/>
-        <light mode="fixed" pos="0 0 0" dir="0 0 -1" diffuse="0.65 0.6 0.5" cutoff="65"/>
-      </body>
-    </body>
 
     <!-- ========== 厨房 (西南, 3.5m x 3m) ========== -->
     <body name="kitchen">
-      <!-- 北墙（留门洞） -->
-      <geom name="kitchen_wall_n1" type="box" pos="-3.2 -1 1.4" size="0.8 0.1 1.4" material="wall_kitchen"/>
-      <geom name="kitchen_wall_n2" type="box" pos="-5 -1 1.4" size="1 0.1 1.4" material="wall_kitchen"/>
+      <!-- 北墙（留门洞0.8m，中心x=-4.1） -->
+      <geom name="kitchen_wall_n1" type="box" pos="-3.0 -1 1.4" size="0.7 0.12 1.4" material="wall_kitchen"/>
+      <geom name="kitchen_wall_n2" type="box" pos="-5.19 -1 1.4" size="0.69 0.12 1.4" material="wall_kitchen"/>
       <!-- 东墙 -->
-      <geom name="kitchen_wall_e" type="box" pos="-2.5 -2.5 1.4" size="0.1 1.5 1.4" material="wall_kitchen"/>
+      <geom name="kitchen_wall_e" type="box" pos="-2.5 -2.5 1.4" size="0.12 1.38 1.4" material="wall_kitchen"/>
 
       <!-- 瓷砖地面 -->
       <geom name="kitchen_floor" type="box" pos="-4.2 -3 0.01" size="1.6 1.4 0.01" material="tile"/>
 
-      <!-- L型橱柜 -->
+      <!-- L型橱柜：厨房的储物家具 -->
+      <!-- 左侧橱柜 -->
       <body name="cabinet_1" pos="-5.6 -3.5 0.43">
-        <geom type="box" size="0.28 1 0.43" material="cabinet_white"/>
-        <geom type="box" pos="0 0 0.5" size="0.3 1.02 0.02" material="marble"/>
+        <geom type="box" size="0.28 1 0.43" material="cabinet_white"/><!-- 橱柜主体，高0.86m -->
+        <geom type="box" pos="0 0 0.5" size="0.3 1.02 0.02" material="marble"/><!-- 大理石台面，高1.0m -->
       </body>
+      <!-- 右侧橱柜 -->
       <body name="cabinet_2" pos="-4.5 -4.4 0.43">
-        <geom type="box" size="0.8 0.28 0.43" material="cabinet_white"/>
-        <geom type="box" pos="0 0 0.5" size="0.82 0.3 0.02" material="marble"/>
+        <geom type="box" size="0.8 0.28 0.43" material="cabinet_white"/><!-- 橱柜主体，高0.86m -->
+        <geom type="box" pos="0 0 0.5" size="0.82 0.3 0.02" material="marble"/><!-- 大理石台面，高1.0m -->
       </body>
 
-      <!-- 吊柜 -->
-      <body name="wall_cabinet_1" pos="-5.6 -3.5 1.75">
-        <geom type="box" size="0.15 1 0.32" material="cabinet_white"/>
+      <!-- 吊柜：厨房墙上的储物柜 -->
+      <!-- pos="-5.6 -3.5 1.75" 吊柜位置坐标 -->
+      <!-- size="0.15 1 0.32" 吊柜尺寸：长0.3m x 宽2.0m x 高0.64m -->
+      <!-- euler="0 0 1.5708" 绕z轴旋转90度 -->
+      <body name="wall_cabinet_1" pos="-5.6 -3.5 1.75" euler="0 0 1.5708">
+        <!-- 书柜模型替换吊柜 -->
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part0" pos="0.0 0.0 0.0" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part8" pos="0.29879 0.10743 -0.00309" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part7" pos="0.00034 0.10743 -0.00309" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part6" pos="0.44167 0.09779 0.00064" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part5" pos="-0.14253 0.09779 0.00064" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part4" pos="0.14957 0.09779 0.00064" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part3" pos="0.14957 0.09860 -0.12318" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part2" pos="0.14957 0.09697 0.12447" rgba="0.95 0.95 0.95 1" type="mesh" />
+        <geom conaffinity="0" contype="0" density="0" mesh="bookcase_part1" pos="0.29948 0.0 0.0" rgba="0.95 0.95 0.95 1" type="mesh" />
       </body>
 
-      <!-- 冰箱 -->
+      <!-- 冰箱：厨房的制冷设备 -->
+      <!-- pos="-5.65 -1.8 0.95" 冰箱位置坐标 -->
+      <!-- size="0.32 0.32 0.95" 冰箱尺寸：长0.64m x 宽0.64m x 高1.9m -->
       <body name="refrigerator" pos="-5.65 -1.8 0.95">
-        <geom type="box" size="0.32 0.32 0.95" rgba="0.92 0.92 0.95 1"/>
+        <geom type="box" size="0.32 0.32 0.95" rgba="0.92 0.92 0.95 1"/><!-- 冰箱主体 -->
       </body>
 
-      <!-- 灶台 -->
+      <!-- 灶台：厨房的烹饪设备 -->
+      <!-- pos="-4 -4.4 0.96" 灶台位置坐标 -->
+      <!-- size="0.32 0.25 0.02" 灶台尺寸：长0.64m x 宽0.5m x 高0.04m -->
       <body name="stove" pos="-4 -4.4 0.96">
-        <geom type="box" size="0.32 0.25 0.02" rgba="0.1 0.1 0.1 1"/>
+        <geom type="box" size="0.32 0.25 0.02" rgba="0.1 0.1 0.1 1"/><!-- 灶台主体 -->
+      </body>
+
+      <!-- 微波炉：厨房的加热设备 -->
+      <!-- pos="-3.5 -4.4 1.0" 微波炉位置坐标 -->
+      <body name="microwave" pos="-5.6 -2.8 0.9" euler="0 0 1.5708">
+        <!-- 微波炉部件 -->
+        <geom conaffinity="0" contype="0" material="micro_white" mesh="micro" type="mesh" />
+        <geom conaffinity="0" contype="0" material="micro_white" mesh="microdoor" type="mesh" />
+        <geom conaffinity="0" contype="0" material="micro_black" mesh="microbutton" type="mesh" />
+        <geom conaffinity="0" contype="0" material="micro_black" mesh="microfeet" type="mesh" />
+        <geom conaffinity="0" contype="0" material="micro_black" mesh="microhandle" type="mesh" />
+        <geom conaffinity="0" contype="0" material="micro_window" mesh="microwindow" type="mesh" />
       </body>
 
       <!-- 水槽 -->
@@ -348,115 +1605,184 @@
         <geom type="cylinder" pos="0 -0.22 0.12" size="0.012 0.12" material="metal"/>
       </body>
 
-      <!-- 吸顶灯 -->
-      <body name="ceiling_light_kitchen" pos="-4.2 -3 2.7">
-        <geom type="box" size="0.35 0.35 0.06" rgba="0.95 0.95 0.92 0.85"/>
-        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.72 0.72 0.7" cutoff="70"/>
-      </body>
+
     </body>
 
-    <!-- ========== 卫生间 (中部, 2.2m x 2m) ========== -->
-    <body name="bathroom">
-      <!-- 墙体（留门洞在西侧） -->
-      <geom name="bath_wall_n" type="box" pos="0 1 1.4" size="1.1 0.1 1.4" material="wall_bathroom"/>
-      <geom name="bath_wall_e" type="box" pos="1.1 0.3 1.4" size="0.1 1.1 1.4" material="wall_bathroom"/>
-      <geom name="bath_wall_s" type="box" pos="0 -0.5 1.4" size="1.1 0.1 1.4" material="wall_bathroom"/>
-      <geom name="bath_wall_w1" type="box" pos="-1.1 -0.1 1.4" size="0.1 0.4 1.4" material="wall_bathroom"/>
-      <geom name="bath_wall_w2" type="box" pos="-1.1 0.7 1.4" size="0.1 0.4 1.4" material="wall_bathroom"/>
+    <!-- ========== 卫生间 (东南, 2.2m x 2m) ========== -->
+    <body name="bathroom" pos="4.2 -2.5 0">
+      <!-- 墙体（只保留北墙，与原有墙面相接） -->
+      <!-- 北墙（留门洞） -->
+      <geom name="bath_wall_n1" type="box" pos="-1.145 1.5 1.4" size="0.7 0.12 1.4" material="wall_bathroom"/>
+      <geom name="bath_wall_n2" type="box" pos="0.98 1.5 1.4" size="0.7 0.12 1.4" material="wall_bathroom"/>
+      <!-- 明显的门洞：从x=-0.4到x=0.4，宽度0.8m -->
 
-      <!-- 瓷砖地面 -->
-      <geom name="bath_floor" type="box" pos="0 0.25 0.01" size="1.05 1.05 0.01" material="tile"/>
+      <!-- 瓷砖地面（填满原来婴儿房地板） -->
+      <geom name="bath_floor" type="box" pos="0 -1 0.01" size="1.7 2.5 0.01" material="tile"/>
+      
+      <!-- 地毯（靠近儿童门） -->
+      <geom name="bath_carpet" type="box" pos="0 0.9 0.02" size="0.5 0.5 0.01" material="carpet"/>
 
       <!-- 马桶 -->
-      <body name="toilet" pos="0.6 0.7 0">
+      <body name="toilet" pos="1.5 0. 0" euler="0 0 1.5708">
         <geom type="cylinder" pos="0 0 0.18" size="0.18 0.18" rgba="0.98 0.98 1 1"/>
         <geom type="box" pos="0 -0.13 0.45" size="0.16 0.07 0.22" rgba="0.98 0.98 1 1"/>
       </body>
 
       <!-- 洗手盆柜 -->
-      <body name="vanity" pos="0 -0.2 0">
-        <geom type="box" pos="0 0 0.38" size="0.45 0.28 0.38" material="cabinet_white"/>
-        <geom type="box" pos="0 0 0.78" size="0.47 0.3 0.02" material="marble"/>
-        <geom type="cylinder" pos="0 0 0.84" size="0.16 0.06" rgba="0.95 0.95 0.98 1"/>
+      <body name="vanity" pos="-1.26 0 0" euler="0 0 4.7124">
+        <geom type="box" pos="0 0 0.38" size="0.4 0.28 0.38" material="cabinet_white"/>
+        <geom type="box" pos="0 0 0.78" size="0.42 0.3 0.02" material="marble"/>
+        <geom type="cylinder" pos="0 0 0.84" size="0.14 0.06" rgba="0.95 0.95 0.98 1"/>
         <!-- 水龙头 -->
-        <geom type="cylinder" pos="0 -0.2 0.91" size="0.01 0.08" material="metal"/>
+        <geom type="cylinder" pos="0 0 0.91" size="0.01 0.08" material="metal"/>
         <!-- 镜子 -->
-        <geom type="box" pos="0 -0.3 1.4" size="0.4 0.02 0.45" material="wood_dark"/>
-        <geom type="box" pos="0 -0.28 1.4" size="0.37 0.01 0.42" material="glass"/>
+        <geom type="box" pos="0 -0.2 1.4" size="0.4 0.02 0.45" material="wood_dark"/>
+        <geom type="box" pos="0 -0.2 1.41" size="0.37 0.01 0.42" material="glass"/>
       </body>
+
+      <!-- 马桶和淋浴房之间的屏风 -->
+      <geom name="bathroom_screen" type="box" pos="0.75 -0.75 0.8" size="1.1 0.02 1.6" material="wood_light" rgba="0.9 0.8 0.6 1"/>
 
       <!-- 淋浴房 -->
-      <body name="shower" pos="-0.65 0.7 0">
-        <geom type="box" pos="0 0 0.03" size="0.42 0.35 0.03" rgba="0.98 0.98 1 1"/>
-        <geom type="box" pos="0.4 0 0.85" size="0.02 0.33 0.85" material="glass"/>
-        <geom type="box" pos="0 0.33 0.85" size="0.42 0.02 0.85" material="glass"/>
+      <body name="shower" pos="0 -2.75 0">
+        <geom type="box" pos="0 0 0.03" size="1.4 0.6 0.03" rgba="0.98 0.98 1 1"/>
+        <geom type="box" pos="1.38 0 0.8" size="0.02 0.6 0.8" material="glass"/>
+        <geom type="box" pos="-1.38 0 0.8" size="0.02 0.6 0.8" material="glass"/>
+        <!-- 北墙（分割为两部分，留出门洞） -->
+        <geom type="box" pos="-0.5 0.58 0.8" size="0.9 0.02 0.8" material="glass"/>
+        <geom type="box" pos="1.1 0.58 0.8" size="0.3 0.02 0.8" material="glass"/>
+        <geom type="box" pos="0 -0.58 0.8" size="1.4 0.02 0.8" material="glass"/>
+        <!-- 玻璃门（靠近马桶侧，向外打开） -->
+        <geom type="box" pos="0.55 0.7 0.8" size="0.2 0.02 0.8" material="glass" rgba="0.85 0.92 0.98 0.5" euler="0 0 0.6981"/>
+        
+        <!-- 淋浴设施 -->
+        <!-- 淋浴柱 -->
+        <geom type="cylinder" pos="-1.3 0 0.8" size="0.02 0.8" material="metal"/>
+        <!-- 淋浴喷头 -->
+        <geom type="cylinder" pos="-1.25 0 1.2" size="0.04 0.04" material="metal" euler="0 0 1.5708"/>
+        <!-- 手持喷头托架 -->
+        <geom type="box" pos="-1.28 0 1.0" size="0.04 0.04 0.02" material="metal"/>
+        <!-- 淋浴控制面板 -->
+        <geom type="box" pos="-1.28 0 0.7" size="0.03 0.15 0.1" rgba="0.8 0.8 0.8 1"/>
       </body>
 
-      <!-- 吸顶灯 -->
-      <body name="ceiling_light_bath" pos="0 0.25 2.7">
-        <geom type="cylinder" size="0.18 0.05" rgba="0.95 0.95 0.95 0.9"/>
-        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.75 0.75 0.75" cutoff="65"/>
-      </body>
+
     </body>
 
     <!-- ========== 走廊 ========== -->
     <body name="hallway">
       <!-- 走廊中央开放空间，由各房间墙体围合 -->
 
-      <!-- 鞋柜 -->
-      <body name="shoe_cabinet" pos="-1.8 0 0.38">
-        <geom type="box" size="0.28 0.65 0.38" material="wood_dark"/>
-        <geom type="box" pos="0 0 0.4" size="0.26 0.63 0.02" material="marble"/>
-      </body>
+
 
       <!-- 穿衣镜 -->
-      <body name="mirror" pos="1.8 0 0.85">
-        <geom type="box" pos="0 0 0" size="0.32 0.04 0.85" material="wood_dark"/>
-        <geom type="box" pos="0 -0.02 0" size="0.29 0.01 0.8" material="glass"/>
+      <body name="mirror" pos="3.4 1.2 1.0">
+        <!-- 镜框 -->
+        <geom type="box" pos="0 0 0" size="0.42 0.02 1.25" material="wood_dark"/>
+        <!-- 镜面 -->
+        <geom type="box" pos="0 -0.01 0" size="0.39 0.001 1.2" material="mirror_glass"/>
+        <!-- 装饰线条 -->
+        <geom type="box" pos="0 0.01 0" size="0.42 0.005 1.25" material="metal"/>
       </body>
 
-      <!-- 走廊吸顶灯 -->
-      <body name="ceiling_light_hall" pos="0 0.5 2.7">
-        <geom type="box" size="0.4 0.12 0.05" rgba="0.95 0.95 0.92 0.85"/>
-        <light mode="fixed" pos="0 0 -0.1" dir="0 0 -1" diffuse="0.6 0.6 0.58" cutoff="75"/>
+
+    </body>
+    
+    <!-- 扫地机器人：走廊的自动清扫设备 -->
+    <body name="robot_vacuum" pos="0 -2 0.03">
+      <!-- 优化后的机身形状，增加稳定性 -->
+      <!-- 主体：更宽更扁平的圆柱形，降低重心 -->
+      <geom name="body" type="cylinder" size="0.25 0.06" rgba="0.3 0.3 0.3 1" mass="4.0"/>
+      <!-- 底部边缘：向外扩展更多，增加稳定性 -->
+      <geom type="cylinder" pos="0 0 -0.01" size="0.27 0.01" rgba="0.2 0.2 0.2 1"/>
+      <!-- 顶部面板：带有边缘 -->
+      <geom type="cylinder" pos="0 0 0.06" size="0.25 0.005" rgba="0.8 0.8 0.8 1"/>
+      <!-- 顶部边缘：稍微向上凸起 -->
+      <geom type="cylinder" pos="0 0 0.07" size="0.24 0.005" rgba="0.7 0.7 0.7 1"/>
+      <!-- 顶部传感器区域：圆形凹陷 -->
+      <geom type="cylinder" pos="0 0 0.075" size="0.15 0.005" rgba="0.2 0.2 0.2 1"/>
+      <!-- 主传感器：圆形凸起 -->
+      <geom type="cylinder" pos="0 0 0.08" size="0.1 0.005" rgba="0.1 0.5 0.8 1"/>
+      <!-- 传感器细节：小圆形按钮 -->
+      <geom type="cylinder" pos="0.07 0 0.08" size="0.02 0.005" rgba="0.8 0.1 0.1 1"/><!-- 红色按钮 -->
+      <geom type="cylinder" pos="-0.07 0 0.08" size="0.02 0.005" rgba="0.1 0.8 0.1 1"/><!-- 绿色按钮 -->
+      <!-- 自由关节，允许机器人自由移动和旋转 -->
+      <joint name="robot_free_joint" type="free"/>
+      
+      <!-- 四个球形轮子 -->
+      <!-- 左前轮 -->
+      <body name="wheel_front_left" pos="-0.18 -0.18 -0.06">
+        <!-- 球形轮子，增加质量提高稳定性 -->
+        <geom name="wheel_front_left_ball" type="sphere" size="0.045" rgba="0.1 0.1 0.1 1" mass="0.5"/>
+        <!-- 球关节，允许轮子自由旋转 -->
+        <joint name="wheel_front_left_joint" type="ball"/>
+      </body>
+      <!-- 右前轮 -->
+      <body name="wheel_front_right" pos="0.18 -0.18 -0.06">
+        <!-- 球形轮子，增加质量提高稳定性 -->
+        <geom name="wheel_front_right_ball" type="sphere" size="0.045" rgba="0.1 0.1 0.1 1" mass="0.5"/>
+        <!-- 球关节，允许轮子自由旋转 -->
+        <joint name="wheel_front_right_joint" type="ball"/>
+      </body>
+      <!-- 左后轮 -->
+      <body name="wheel_back_left" pos="-0.18 0.18 -0.06">
+        <!-- 球形轮子，增加质量提高稳定性 -->
+        <geom name="wheel_back_left_ball" type="sphere" size="0.045" rgba="0.1 0.1 0.1 1" mass="0.5"/>
+        <!-- 球关节，允许轮子自由旋转 -->
+        <joint name="wheel_back_left_joint" type="ball"/>
+      </body>
+      <!-- 右后轮 -->
+      <body name="wheel_back_right" pos="0.18 0.18 -0.06">
+        <!-- 球形轮子，增加质量提高稳定性 -->
+        <geom name="wheel_back_right_ball" type="sphere" size="0.045" rgba="0.1 0.1 0.1 1" mass="0.5"/>
+        <!-- 球关节，允许轮子自由旋转 -->
+        <joint name="wheel_back_right_joint" type="ball"/>
       </body>
     </body>
 
     <!-- ========== 门 ========== -->
-    <!-- 主卧门 -->
-    <body name="door_master" pos="2.5 3.5 0.9">
-      <geom type="box" size="0.4 0.04 0.9" material="door_wood"/>
-      <geom type="cylinder" pos="0.3 0.05 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
-      <joint name="hinge_master" type="hinge" pos="-0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    <!-- 客厅门（门洞宽0.8m，在y=-1墙上，中心x=0） -->
+    <body name="door_living" pos="0 -1.06 0.9">
+      <geom type="box" size="0.4 0.03 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="-0.3 -0.04 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_living" type="hinge" pos="0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
     </body>
 
-    <!-- 次卧门 -->
-    <body name="door_bedroom2" pos="-2.5 3.5 0.9">
-      <geom type="box" size="0.4 0.04 0.9" material="door_wood"/>
-      <geom type="cylinder" pos="-0.3 0.05 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
-      <joint name="hinge_bedroom2" type="hinge" pos="0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    <!-- 主卧门（门洞宽0.8m，在y=1墙上，中心x=4.2） -->
+    <body name="door_master" pos="4.495 1.06 0.9">
+      <geom type="box" size="0.4 0.03 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="-0.3 -0.04 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_master" type="hinge" pos="0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
     </body>
 
-    <!-- 儿童房门 -->
-    <body name="door_bedroom3" pos="4 -1 0.9">
-      <geom type="box" size="0.04 0.4 0.9" material="door_wood"/>
-      <geom type="cylinder" pos="0.05 -0.3 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
-      <joint name="hinge_bedroom3" type="hinge" pos="0 -0.4 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    <!-- 次卧门（门洞宽0.8m，在y=1墙上，中心x=-4.2） -->
+    <body name="door_bedroom2" pos="-3.8 1.06 0.9">
+      <geom type="box" size="0.4 0.03 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.3 -0.04 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_bedroom2" type="hinge" pos="-0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
     </body>
 
-    <!-- 厨房门 -->
-    <body name="door_kitchen" pos="-4 -1 0.9">
-      <geom type="box" size="0.04 0.4 0.9" material="door_wood"/>
-      <geom type="cylinder" pos="0.05 0.3 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
-      <joint name="hinge_kitchen" type="hinge" pos="0 0.4 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    <!-- 儿童房门（门洞宽0.8m，在y=-1墙上，中心x=4.1） -->
+    <body name="door_bedroom3" pos="4.13 -1.06 0.9">
+      <geom type="box" size="0.4 0.03 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="-0.3 -0.04 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_bedroom3" type="hinge" pos="0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
     </body>
 
-    <!-- 卫生间门 -->
-    <body name="door_bathroom" pos="-1.1 0.3 0.9">
-      <geom type="box" size="0.04 0.35 0.9" material="door_wood"/>
-      <geom type="cylinder" pos="0.05 0.25 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
-      <joint name="hinge_bathroom" type="hinge" pos="0 -0.35 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    <!-- 厨房门（门洞宽0.8m，在y=-1墙上，中心x=-4.1） -->
+    <body name="door_kitchen" pos="-4.1 -1.06 0.9">
+      <geom type="box" size="0.4 0.03 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.3 -0.04 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_kitchen" type="hinge" pos="-0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
     </body>
+
+    <!-- 书房门（门洞宽0.8m，在y=1墙上，中心x=0） -->
+    <body name="door_study" pos="0 1.06 0.9">
+      <geom type="box" size="0.4 0.03 0.9" material="door_wood"/>
+      <geom type="cylinder" pos="0.3 -0.04 0" size="0.012 0.04" material="metal" euler="0 1.57 0"/>
+      <joint name="hinge_study" type="hinge" pos="-0.4 0 0" axis="0 0 1" range="-1.57 1.57" damping="1.5"/>
+    </body>
+
 
     <!-- ========== 窗户 ========== -->
     <!-- 客厅窗 -->
@@ -480,12 +1806,7 @@
       <geom type="box" pos="0 0 1.15" size="0.08 1.6 0.05" material="cabinet_white"/>
     </body>
 
-    <!-- 儿童房窗 -->
-    <body name="window_bedroom3" pos="5.94 -2.5 1.3">
-      <geom type="box" size="0.06 1.2 0.9" material="glass_window"/>
-      <geom type="box" pos="0 0 -1.25" size="0.08 1.2 0.05" material="cabinet_white"/>
-      <geom type="box" pos="0 0 0.95" size="0.08 1.2 0.05" material="cabinet_white"/>
-    </body>
+
 
     <!-- 厨房窗 -->
     <body name="window_kitchen" pos="-5.94 -3 1.3">
@@ -496,81 +1817,61 @@
 
     <!-- ========== 可移动物品 ========== -->
     <!-- 沙发抱枕 -->
-    <body name="cushion_1" pos="-3.5 -4.5 0.52">
+    <body name="cushion_1" pos="2.0 -2.8 0.52">
       <freejoint/>
-      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3"/>
+      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3" friction="0.8 0.05 0.01" condim="4"/>
     </body>
-    <body name="cushion_2" pos="-2.2 -4.5 0.52">
+    <body name="cushion_2" pos="-0.2 -2.8 0.52">
       <freejoint/>
-      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3"/>
+      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3" friction="0.8 0.05 0.01" condim="4"/>
+    </body>
+    <body name="cushion_3" pos="1.0 -2.8 0.52">
+      <freejoint/>
+      <geom type="box" size="0.18 0.14 0.05" material="sofa_cushion" mass="0.3" friction="0.8 0.05 0.01" condim="4"/>
     </body>
 
     <!-- 茶几花瓶 -->
-    <body name="vase" pos="0 -3 0.38">
+    <body name="vase" pos="1 -3.8 0.38">
       <freejoint/>
-      <geom type="cylinder" size="0.055 0.11" rgba="0.3 0.5 0.7 0.8" mass="0.35"/>
+      <geom type="cylinder" size="0.055 0.11" rgba="0.3 0.5 0.7 0.8" mass="0.35" friction="0.6 0.02 0.005" condim="3"/>
     </body>
 
     <!-- 主卧枕头 -->
-    <body name="pillow_1" pos="3.9 4.5 0.58">
+    <body name="pillow_1" pos="3.9 5.5 0.58">
       <freejoint/>
-      <geom type="box" size="0.22 0.14 0.07" material="pillow_white" mass="0.35"/>
+      <geom type="box" size="0.22 0.14 0.07" material="pillow_white" mass="0.35" friction="0.8 0.05 0.01" condim="4"/>
     </body>
-    <body name="pillow_2" pos="4.7 4.5 0.58">
+    <body name="pillow_2" pos="4.7 5.5 0.58">
       <freejoint/>
-      <geom type="box" size="0.22 0.14 0.07" material="pillow_white" mass="0.35"/>
+      <geom type="box" size="0.22 0.14 0.07" material="pillow_white" mass="0.35" friction="0.8 0.05 0.01" condim="4"/>
     </body>
 
     <!-- 次卧枕头 -->
-    <body name="pillow_br2" pos="-4.6 4.5 0.5">
+    <body name="pillow_br2" pos="-4.6 5.2 0.5">
       <freejoint/>
-      <geom type="box" size="0.18 0.12 0.06" material="pillow_white" mass="0.28"/>
+      <geom type="box" size="0.18 0.12 0.06" material="pillow_white" mass="0.28" friction="0.8 0.05 0.01" condim="4"/>
     </body>
 
-    <!-- 儿童房枕头 -->
-    <body name="pillow_br3" pos="5.3 -3.5 0.42">
-      <freejoint/>
-      <geom type="box" size="0.16 0.11 0.05" material="blanket_pink" mass="0.22"/>
-    </body>
 
-    <!-- 玩具熊 -->
-    <body name="teddy_bear" pos="5.5 -2.8 0.45">
-      <freejoint/>
-      <geom type="sphere" size="0.07" rgba="0.65 0.45 0.3 1" mass="0.25"/>
-      <geom type="sphere" pos="0 0 0.1" size="0.055" rgba="0.6 0.4 0.25 1"/>
-    </body>
-
-    <!-- 玩具积木 -->
-    <body name="toy_block_1" pos="5.5 -1.5 0.73">
-      <freejoint/>
-      <geom type="box" size="0.035 0.035 0.035" rgba="1 0.3 0.3 1" mass="0.08"/>
-    </body>
-    <body name="toy_block_2" pos="5.6 -1.5 0.73">
-      <freejoint/>
-      <geom type="box" size="0.035 0.035 0.035" rgba="0.3 1 0.3 1" mass="0.08"/>
-    </body>
 
     <!-- 厨房盘子 -->
     <body name="plate" pos="-5.2 -3.5 0.98">
       <freejoint/>
-      <geom type="cylinder" size="0.075 0.01" rgba="0.95 0.95 0.98 1" mass="0.28"/>
+      <geom type="cylinder" size="0.075 0.01" rgba="0.95 0.95 0.98 1" mass="0.28" friction="0.6 0.02 0.005" condim="3"/>
     </body>
 
     <!-- 调料瓶 -->
     <body name="spice_1" pos="-4.5 -4.4 1.0">
       <freejoint/>
-      <geom type="cylinder" size="0.022 0.075" rgba="0.8 0.3 0.2 0.8" mass="0.13"/>
+      <geom type="cylinder" size="0.022 0.075" rgba="0.8 0.3 0.2 0.8" mass="0.13" friction="0.6 0.02 0.005" condim="3"/>
     </body>
     <body name="spice_2" pos="-4.3 -4.4 1.0">
       <freejoint/>
-      <geom type="cylinder" size="0.022 0.075" rgba="0.3 0.7 0.3 0.8" mass="0.13"/>
+      <geom type="cylinder" size="0.022 0.075" rgba="0.3 0.7 0.3 0.8" mass="0.13" friction="0.6 0.02 0.005" condim="3"/>
     </body>
 
-    <!-- 钥匙 -->
-    <body name="keys" pos="-1.8 0.2 0.79">
-      <freejoint/>
-      <geom type="box" size="0.018 0.035 0.004" rgba="0.7 0.7 0.75 1" mass="0.04"/>
-    </body>
+
+    
 
     <!-- ========== 相机视角 ========== -->
     <camera name="overview" pos="0 -12 11" xyaxes="1 0 0 0 0.8 1" mode="fixed"/>
@@ -584,11 +1885,18 @@
 
   <!-- 执行器 -->
   <actuator>
-    <motor name="motor_door_master" joint="hinge_master" gear="12"/>
-    <motor name="motor_door_bedroom2" joint="hinge_bedroom2" gear="12"/>
-    <motor name="motor_door_bedroom3" joint="hinge_bedroom3" gear="12"/>
-    <motor name="motor_door_kitchen" joint="hinge_kitchen" gear="12"/>
-    <motor name="motor_door_bathroom" joint="hinge_bathroom" gear="12"/>
+    <motor name="motor_door_living" joint="hinge_living" gear="12" ctrlrange="-1 1" forcerange="-10 10"/>
+    <motor name="motor_door_master" joint="hinge_master" gear="12" ctrlrange="-1 1" forcerange="-10 10"/>
+    <motor name="motor_door_bedroom2" joint="hinge_bedroom2" gear="12" ctrlrange="-1 1" forcerange="-10 10"/>
+    <motor name="motor_door_bedroom3" joint="hinge_bedroom3" gear="12" ctrlrange="-1 1" forcerange="-10 10"/>
+    <motor name="motor_door_kitchen" joint="hinge_kitchen" gear="12" ctrlrange="-1 1" forcerange="-10 10"/>
+    <motor name="motor_door_study" joint="hinge_study" gear="12" ctrlrange="-1 1" forcerange="-10 10"/>
+    
+    <!-- 扫地机器人电机 -->
+    <motor name="robot_x" joint="robot_free_joint" gear="100 0 0 0 0 0" ctrlrange="-1 1" forcerange="-50 50"/>
+    <motor name="robot_y" joint="robot_free_joint" gear="0 100 0 0 0 0" ctrlrange="-1 1" forcerange="-50 50"/>
+    <motor name="robot_z" joint="robot_free_joint" gear="0 0 100 0 0 0" ctrlrange="-1 1" forcerange="-50 50"/>
+
   </actuator>
 
 </mujoco>
